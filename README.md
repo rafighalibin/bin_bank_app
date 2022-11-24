@@ -32,7 +32,9 @@ Masalah sampah di Indonesia masih menjadi polemik hingga menjadi salah satu isu 
 
 **4. History		: Rafi Ghalibin Abrar**
 
-    -> Menampilkan riwayat transaksi user dalam card. Cara pengintegrasiannya adalah dengan melakukan HTTP GET pada setiap filter transaksi. Pada apliaksi web sudah terdapat beberapa method views yang mengirimkan data transaksi dalam bentuk json, namun terdapat beberapa method yang perlu ditambahkan untuk menunjukan data transaksi yang sudah di-filter.
+    -> Menampilkan riwayat transaksi user dalam card. Cara pengintegrasiannya adalah dengan melakukan HTTP GET pada setiap filter transaksi. Pada apliaksi web sudah 
+    terdapat beberapa method views yang mengirimkan data transaksi dalam bentuk json, namun terdapat beberapa method yang perlu ditambahkan untuk menunjukan data 
+    transaksi yang sudah di-filter.
 
 **5. Deposit Sampah	: Kausar Meutuwah**
 
