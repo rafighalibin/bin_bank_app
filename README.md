@@ -20,7 +20,7 @@ Masalah sampah di Indonesia masih menjadi polemik hingga menjadi salah satu isu 
 
 **1. Home 		: Amanda Christie Tarigan**
 
-   -> Welcome, artikel, jumlah penerimaan sampah, location, feedback
+      -> Merupakan welcoming page yang berisi penjelasan singkat aplikasi Bin Bank, menampilkan artikel, jumlah penerimaan sampah, location, dan form feedback. Cara pengintegrasiannya adalah sebagai berikut. Karena halaman ini akan menampilkan artikel dan  jumlah penerimaan sampah berdasarkan  jumlah donasi semua user, maka pengintegrasiannya dilakukan dengan HTTP get untuk mengambil data-data tersebut dan ditampilkan di aplikasi. Selain itu, user juga dapat mengirim feedback untuk testimoni dan evaluasi bagi Bin Bank melalui form yang akan dikirim dengan HTTP Post.  Feedback message diambil dengan HTTP get dari server dan ditampilkan di aplikasi.
 
 **2. Authentication	: Syifa Afra Kamila Mumtaz**
 
@@ -38,7 +38,7 @@ Masalah sampah di Indonesia masih menjadi polemik hingga menjadi salah satu isu 
 
 **5. Deposit Sampah	: Kausar Meutuwah**
 
-   -> Menghitung jumlah sampah dan harganya, memilih bank sampah
+     -> Menghitung jumlah sampah dan harganya, memilih bank sampah. Cara pengintegrasiannya adalah sebagai berikut. Pertama - tama,  modul deposit sampah akan mengambil data deposit sampah user dari webservice menggunakan HTTP get. Selanjutnya DepositSampah akan menampilkan sebuah form. Form tersebut akan menerima data dari user dan mengirimkannya ke WebService menggunakan HTTP Post.
 
 ## 👥 Role atau Peran Pengguna 👥
 
