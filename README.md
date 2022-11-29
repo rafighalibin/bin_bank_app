@@ -20,25 +20,25 @@ Masalah sampah di Indonesia masih menjadi polemik hingga menjadi salah satu isu 
 
 **1. Home 		: Amanda Christie Tarigan**
 
-      -> Merupakan welcoming page yang berisi penjelasan singkat aplikasi Bin Bank, menampilkan artikel, jumlah penerimaan sampah, location, dan form feedback. Cara pengintegrasiannya adalah sebagai berikut. Karena halaman ini akan menampilkan artikel dan  jumlah penerimaan sampah berdasarkan  jumlah donasi semua user, maka pengintegrasiannya dilakukan dengan HTTP get untuk mengambil data-data tersebut dan ditampilkan di aplikasi. Selain itu, user juga dapat mengirim feedback untuk testimoni dan evaluasi bagi Bin Bank melalui form yang akan dikirim dengan HTTP Post.  Feedback message diambil dengan HTTP get dari server dan ditampilkan di aplikasi.
+-> Merupakan welcoming page yang berisi penjelasan singkat aplikasi Bin Bank, menampilkan artikel, jumlah penerimaan sampah, location, dan form feedback. Cara pengintegrasiannya adalah sebagai berikut. Karena halaman ini akan menampilkan artikel dan  jumlah penerimaan sampah berdasarkan  jumlah donasi semua user, maka pengintegrasiannya dilakukan dengan HTTP get untuk mengambil data-data tersebut dan ditampilkan di aplikasi. Selain itu, user juga dapat mengirim feedback untuk testimoni dan evaluasi bagi Bin Bank melalui form yang akan dikirim dengan HTTP Post.  Feedback message diambil dengan HTTP get dari server dan ditampilkan di aplikasi.
 
 **2. Authentication	: Syifa Afra Kamila Mumtaz**
 
-   -> Merupakan modul untuk login, registrasi, logout sebagai user. Cara pengintegrasiannya adalah melakukan validasi user dengan pemanggilan asinkronus HTTP GET saat membuat form login pada aplikasi flutter. Untuk mengintegrasikan dengan aplikasi web yang sudah dibuat saat Proyek Tengah Semester, maka perlu dibuat views di aplikasi web tersebut supaya aplikasi mobile ini dapat mengirimkan datanya ke aplikasi web untuk divalidasi.
+-> Merupakan modul untuk login, registrasi, logout sebagai user. Cara pengintegrasiannya adalah melakukan validasi user dengan pemanggilan asinkronus HTTP GET saat membuat form login pada aplikasi flutter. Untuk mengintegrasikan dengan aplikasi web yang sudah dibuat saat Proyek Tengah Semester, maka perlu dibuat views di aplikasi web tersebut supaya aplikasi mobile ini dapat mengirimkan datanya ke aplikasi web untuk divalidasi.
 
 **3. Leaderboard 	: Muhammad Falensi Azmi**
 
-    -> Menampilkan peringkat user berdasarkan total sampah yang dikirim, pesan semangat, dan pencarian peringkat berdasarkan username. Cara pengintegrasiannya adalah sebagai berikut. Fitur ini akan mengambil data user beserta poinnya (dengan HTTP get) dan diurutkan berdasarkan poin tertinggi. Sepuluh user dengan poin tertinggi akan ditampilkan di aplikasi Flutter. Selain itu, user juga dapat mengirim pesan semangat untuk membuat user lebih termotivasi menggunakan bank sampah. Pesan-pesan ini akan diambil (dengan HTTP get) dari server dan ditampilkan di aplikasi. User juga bisa mengirim pesan semangat melalui form yang selanjutnya akan dikirim dengan HTTP post agar dapat tersimpan di server. Untuk mencari peringkat user, tersedia fitur pencarian user yang akan diimplementasikan dengan HTTP get untuk memperoleh data tentang user tersebut di server. Semua HTTP request di atas dilakukan ke aplikasi web yang sudah dibuat pada saat Proyek Tengah Semester.
+-> Menampilkan peringkat user berdasarkan total sampah yang dikirim, pesan semangat, dan pencarian peringkat berdasarkan username. Cara pengintegrasiannya adalah sebagai berikut. Fitur ini akan mengambil data user beserta poinnya (dengan HTTP get) dan diurutkan berdasarkan poin tertinggi. Sepuluh user dengan poin tertinggi akan ditampilkan di aplikasi Flutter. Selain itu, user juga dapat mengirim pesan semangat untuk membuat user lebih termotivasi menggunakan bank sampah. Pesan-pesan ini akan diambil (dengan HTTP get) dari server dan ditampilkan di aplikasi. User juga bisa mengirim pesan semangat melalui form yang selanjutnya akan dikirim dengan HTTP post agar dapat tersimpan di server. Untuk mencari peringkat user, tersedia fitur pencarian user yang akan diimplementasikan dengan HTTP get untuk memperoleh data tentang user tersebut di server. Semua HTTP request di atas dilakukan ke aplikasi web yang sudah dibuat pada saat Proyek Tengah Semester.
 
 **4. History		: Rafi Ghalibin Abrar**
 
-    -> Menampilkan riwayat transaksi user dalam card. Cara pengintegrasiannya adalah dengan melakukan HTTP GET pada setiap filter transaksi. Pada apliaksi web sudah 
+-> Menampilkan riwayat transaksi user dalam card. Cara pengintegrasiannya adalah dengan melakukan HTTP GET pada setiap filter transaksi. Pada apliaksi web sudah 
     terdapat beberapa method views yang mengirimkan data transaksi dalam bentuk json, namun terdapat beberapa method yang perlu ditambahkan untuk menunjukan data 
     transaksi yang sudah di-filter.
 
 **5. Deposit Sampah	: Kausar Meutuwah**
 
-     -> Menghitung jumlah sampah dan harganya, memilih bank sampah. Cara pengintegrasiannya adalah sebagai berikut. Pertama - tama,  modul deposit sampah akan mengambil data deposit sampah user dari webservice menggunakan HTTP get. Selanjutnya DepositSampah akan menampilkan sebuah form. Form tersebut akan menerima data dari user dan mengirimkannya ke WebService menggunakan HTTP Post.
+-> Menghitung jumlah sampah dan harganya, memilih bank sampah. Cara pengintegrasiannya adalah sebagai berikut. Pertama - tama,  modul deposit sampah akan mengambil data deposit sampah user dari webservice menggunakan HTTP get. Selanjutnya DepositSampah akan menampilkan sebuah form. Form tersebut akan menerima data dari user dan mengirimkannya ke WebService menggunakan HTTP Post.
 
 ## 👥 Role atau Peran Pengguna 👥
 
