@@ -8,7 +8,8 @@
 - Amanda Christie Tarigan - 2106751322 
 
 ## 🌐 Tautan 🌐
-https://bin-bank-pbp.herokuapp.com/
+Mobile App : _coming soon_
+Website App : https://bin-bank-pbp.up.railway.app/
 
 ## 📜 Cerita Aplikasi 📜
 
@@ -16,7 +17,7 @@ Masalah sampah di Indonesia masih menjadi polemik hingga menjadi salah satu isu 
 
 **Bin-Bank** hadir sebagai aplikasi berbasis web yang bertujuan untuk mendukung kegiatan operasional bank sampah di seluruh Indonesia. Aplikasi ini memudahkan masyarakat untuk memperolah informasi secara efisien mengenai bank sampah dan kesehatan lingkungan. Selain itu, pengguna yang terdaftar pada aplikasi ini dapat lebih mudah mengirimkan sampahnya ke bank sampah terdekat dengan riwayat pengiriman yang tercatat pada aplikasi. 
 
-## 📋 Daftar Modul yang Akan Diimplementasikan 📋
+## 📋 Daftar Modul dan Alur Pengintegrasian 📋
 
 **1. Home 		: Amanda Christie Tarigan**
 
@@ -51,5 +52,3 @@ Masalah sampah di Indonesia masih menjadi polemik hingga menjadi salah satu isu 
 
 - Tidak perlu melakukan login
 - Hanya dapat mengakses home page
-
-## Alur Pengintegrasian 
