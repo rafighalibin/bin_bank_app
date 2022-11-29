@@ -13,7 +13,7 @@
 
 ## 📜 Cerita Aplikasi 📜
 
-Masalah sampah di Indonesia masih menjadi polemik hingga menjadi salah satu isu penting dalam Presidensi G20 Indonesia 2022. Jumlah dan jenis sampah terus bertambah seiring pertumbuhan penduduk dan perkembangan teknologi, tetapi laju solusi pengelolaan sampah masih tertinggal jauh di belakang. Bank Sampah merupakan salah satu solusi pengumpulan dan pengelolaan sampah yang melibatkan sistem seperti perbankan, tetapi yang ditabung bukanlah uang melainkan sampah. Nasabah yang merupakan masyarakat yang ingin mengirimkan sampahnya akan memiliki buku tabungan untuk mencatat riwayat pengiriman sampah dan uang yang diperoleh. 
+Masalah sampah di Indonesia masih menjadi polemik hingga menjadi salah satu isu penting dalam Presidensi G20 Indonesia 2022. Jumlah dan jenis sampah terus bertambah seiring pertumbuhan penduduk dan perkembangan teknologi, tetapi laju solusi pengelolaan sampah masih tertinggal jauh di belakang. BinBank merupakan salah satu solusi pengumpulan dan pengelolaan sampah yang melibatkan sistem seperti perbankan, tetapi yang ditabung bukanlah uang melainkan sampah. Nasabah yang merupakan masyarakat yang ingin mengirimkan sampahnya akan memiliki buku tabungan untuk mencatat riwayat pengiriman sampah dan uang yang diperoleh. 
 
 **Bin-Bank** hadir sebagai aplikasi berbasis web yang bertujuan untuk mendukung kegiatan operasional bank sampah di seluruh Indonesia. Aplikasi ini memudahkan masyarakat untuk memperolah informasi secara efisien mengenai bank sampah dan kesehatan lingkungan. Selain itu, pengguna yang terdaftar pada aplikasi ini dapat lebih mudah mengirimkan sampahnya ke bank sampah terdekat dengan riwayat pengiriman yang tercatat pada aplikasi. 
 
