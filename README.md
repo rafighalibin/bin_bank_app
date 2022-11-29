@@ -8,8 +8,8 @@
 - Amanda Christie Tarigan - 2106751322 
 
 ## 🌐 Tautan 🌐
-Mobile App : _coming soon_
-Website App : https://bin-bank-pbp.up.railway.app/
+* Mobile App : _coming soon_
+* Website App : https://bin-bank-pbp.up.railway.app/
 
 ## 📜 Cerita Aplikasi 📜
 
