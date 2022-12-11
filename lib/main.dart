@@ -58,13 +58,23 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
+  Widget getWidget() {
+    final request = context.watch<CookieRequest>();
+
+    if (request.jsonData['username'] == null) {
+      return const MyDrawerPublic();
+    } else {
+      return const MyDrawerUser();
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text("BinBank: ${widget.title}"),
       ),
-      drawer: const MyDrawerPublic(),
+      drawer: getWidget(),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,

@@ -47,11 +47,11 @@ Future<List<Transactions>> fetchTransactions1(String user) async {
 }
 
 Future<List<Transactions>> fetchTransactionsRange(
-    String user, int min, int max) async {
+    String user, String min, String max) async {
   var url = Uri.parse('https://bin-bank-pbp.up.railway.app/json/post/range');
   Map<String, String> requestBody = <String, String>{
-    'Min': min.toString(),
-    'Max': max.toString(),
+    'Min': min,
+    'Max': max,
     'user': user,
   };
   var request = http.MultipartRequest('POST', url)..fields.addAll(requestBody);

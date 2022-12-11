@@ -28,8 +28,10 @@ class MyDrawerUser extends StatelessWidget {
           ListTile(
             title: const Text('HomePage'),
             onTap: () {
-              Navigator.of(context).pushReplacement(
-                  MaterialPageRoute(builder: (context) => const MyHomePage(title: '',)));
+              Navigator.of(context).pushReplacement(MaterialPageRoute(
+                  builder: (context) => const MyHomePage(
+                        title: '',
+                      )));
             },
           ),
           ListTile(
@@ -46,7 +48,6 @@ class MyDrawerUser extends StatelessWidget {
                   builder: (context) => const MyDepositPage()));
             },
           ),
-          
           ListTile(
             title: const Text('History'),
             onTap: () {
