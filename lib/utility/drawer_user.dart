@@ -1,5 +1,6 @@
 import 'package:bin_bank_app/page/deposit_sampah.dart';
 import 'package:bin_bank_app/page/leaderboard.dart';
+import 'package:bin_bank_app/page/history.dart';
 import 'package:flutter/material.dart';
 import 'package:bin_bank_app/main.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
@@ -45,6 +46,14 @@ class MyDrawerUser extends StatelessWidget {
                   builder: (context) => const MyDepositPage()));
             },
           ),
+          
+          ListTile(
+            title: const Text('History'),
+            onTap: () {
+              Navigator.of(context).pushReplacement(
+                  MaterialPageRoute(builder: (context) => const HistoryPage()));
+            },
+          )
           ListTile(
             title: const Text('Logout'),
             // onTap: () {
@@ -52,7 +61,7 @@ class MyDrawerUser extends StatelessWidget {
             //   Navigator.of(context).pushReplacement(MaterialPageRoute(
             //       builder: (context) => const MyHomePage()));
             // },
-          )
+          ),
         ],
       ));
 }
