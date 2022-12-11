@@ -53,7 +53,7 @@ class MyDrawerUser extends StatelessWidget {
               Navigator.of(context).pushReplacement(
                   MaterialPageRoute(builder: (context) => const HistoryPage()));
             },
-          )
+          ),
           ListTile(
             title: const Text('Logout'),
             // onTap: () {
