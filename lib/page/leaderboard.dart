@@ -12,10 +12,7 @@ class LeaderboardPage extends StatefulWidget {
 class _MyFormPageState extends State<LeaderboardPage> {
   final _formKey = GlobalKey<FormState>();
   String judul = "";
-  int nominal = 0;
-  String? jenis;
   DateTime tanggal = DateTime.now();
-  List<String> jenis_pilihan = ['Pemasukan', 'Pengeluaran'];
 
   @override
   Widget build(BuildContext context) {
@@ -37,6 +34,7 @@ class _MyFormPageState extends State<LeaderboardPage> {
                   ),
                   Container(
                     alignment: Alignment.center,
+                    constraints: const BoxConstraints(maxWidth: 600),
                     margin: const EdgeInsets.fromLTRB(7, 10, 7, 15),
                     child: Table(
                         columnWidths: const {
@@ -65,12 +63,12 @@ class _MyFormPageState extends State<LeaderboardPage> {
                   ),
                   TextFormField(
                     decoration: InputDecoration(
-                      labelText: "Judul",
-                      // Menambahkan circular border agar lebih rapi
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(5.0),
                       ),
                     ),
+                    keyboardType: TextInputType.multiline,
+                    maxLines: 4,
                     // Menambahkan behavior saat nama diketik
                     onChanged: (String? value) {
                       setState(() {
@@ -86,76 +84,11 @@ class _MyFormPageState extends State<LeaderboardPage> {
                     // Validator sebagai validasi form
                     validator: (String? value) {
                       if (value == null || value.isEmpty) {
-                        return 'Nama lengkap tidak boleh kosong!';
+                        return 'Pesan dukungan tidak boleh kosong.';
                       }
                       return null;
                     },
                   ),
-                  const SizedBox(height: 10),
-                  TextFormField(
-                    keyboardType: TextInputType.number,
-                    decoration: InputDecoration(
-                      labelText: "Nominal",
-                      // Menambahkan circular border agar lebih rapi
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(5.0),
-                      ),
-                    ),
-                    // Menambahkan behavior saat nama diketik
-                    onChanged: (String? value) {
-                      int? number = int.tryParse(value!);
-                      setState(() {
-                        if (number == null) {
-                          nominal = 0;
-                        } else {
-                          nominal = number;
-                        }
-                      });
-                    },
-                    // Menambahkan behavior saat data disimpan
-                    onSaved: (String? value) {
-                      int? number = int.tryParse(value!);
-                      setState(() {
-                        if (number == null) {
-                          nominal = 0;
-                        } else {
-                          nominal = number;
-                        }
-                      });
-                    },
-                  ),
-                  const SizedBox(height: 10),
-                  DropdownButton(
-                    value: jenis,
-                    hint: const Text("Pilih Jenis"),
-                    icon: const Icon(Icons.keyboard_arrow_down),
-                    items: jenis_pilihan.map((String items) {
-                      return DropdownMenuItem(
-                        value: items,
-                        child: Text(items),
-                      );
-                    }).toList(),
-                    onChanged: (String? newValue) {
-                      setState(() {
-                        jenis = newValue!;
-                      });
-                    },
-                  ),
-                  const SizedBox(height: 10),
-                  OutlinedButton(
-                      onPressed: () {
-                        showDatePicker(
-                          context: context,
-                          initialDate: DateTime.now(),
-                          firstDate: DateTime(1950),
-                          lastDate: DateTime(2100),
-                        ).then((value) {
-                          setState(() {
-                            tanggal = value!;
-                          });
-                        });
-                      },
-                      child: const Text("Pilih Tanggal")),
                   const SizedBox(height: 10),
                   TextButton(
                     style: ButtonStyle(
