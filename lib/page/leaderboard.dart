@@ -1,5 +1,5 @@
 import 'package:bin_bank_app/main.dart';
-import 'package:bin_bank_app/utility/drawer.dart';
+import 'package:bin_bank_app/utility/drawer_user.dart';
 import 'package:flutter/material.dart';
 
 class LeaderboardPage extends StatefulWidget {
@@ -203,6 +203,6 @@ class _MyFormPageState extends State<LeaderboardPage> {
             ),
           ),
         ),
-        drawer: const MyDrawer());
+        drawer: const MyDrawerUser());
   }
 }

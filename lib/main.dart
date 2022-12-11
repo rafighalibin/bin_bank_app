@@ -1,7 +1,12 @@
-import 'package:bin_bank_app/utility/drawer.dart';
+import 'package:bin_bank_app/page/login_page.dart';
+import 'package:bin_bank_app/utility/drawer_public.dart';
+import 'package:bin_bank_app/utility/drawer_user.dart';
 import 'package:flutter/material.dart';
+import 'package:pbp_django_auth/pbp_django_auth.dart';
+import 'package:provider/provider.dart';
 
 void main() {
+  bool isLoggedIn = false;
   runApp(const MyApp());
 }
 
@@ -11,18 +16,27 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
+    return Provider(
+      create: (_) {
+        CookieRequest request = CookieRequest();
+        return request;
+      },
+      child: MaterialApp(
+        title: 'Flutter App',
+        theme: ThemeData(
+          primarySwatch: Colors.blue,
+        ),
+        home: const MyHomePage(title: 'Flutter App'),
+        routes: {
+          "/login": (BuildContext context) => const LoginPage(),
+        },
       ),
-      home: const MyHomePage(),
     );
   }
 }
 
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key});
+  const MyHomePage({super.key, required String title});
   final String title = 'Program Counter';
 
   @override
@@ -50,7 +64,7 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: Text("BinBank: ${widget.title}"),
       ),
-      drawer: const MyDrawer(),
+      drawer: const MyDrawerPublic(),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -61,13 +75,13 @@ class _MyHomePageState extends State<MyHomePage> {
                 children: [
                   _counter % 2 == 0
                       ? const Text(
-                    'GENAP',
-                    style: TextStyle(color: Colors.red),
-                  )
+                          'GENAP',
+                          style: TextStyle(color: Colors.red),
+                        )
                       : const Text(
-                    'GANJIL',
-                    style: TextStyle(color: Colors.blue),
-                  ),
+                          'GANJIL',
+                          style: TextStyle(color: Colors.blue),
+                        ),
                   Text(
                     '$_counter',
                     style: Theme.of(context).textTheme.headline4,
