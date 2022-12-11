@@ -1,4 +1,4 @@
-import 'package:bin_bank_app/utility/drawer.dart';
+import 'package:bin_bank_app/utility/drawer_user.dart';
 import 'package:flutter/material.dart';
 import 'package:bin_bank_app/utility/transactions_fetch.dart';
 import 'package:bin_bank_app/page/deposit_detail.dart';
@@ -15,7 +15,7 @@ class _MyDepositPageState extends State<MyDepositPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(title: const Text("Deposit Sampah")),
-        drawer: const MyDrawer(),
+        drawer: const MyDrawerUser(),
         body: FutureBuilder(
             future: fetchTransactions(),
             builder: (context, AsyncSnapshot snapshot) {
