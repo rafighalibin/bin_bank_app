@@ -26,7 +26,7 @@ class _MyDepositPageState extends State<MyDepositPage> {
                   return Column(
                     children: const [
                       Text(
-                        "Tidak ada item di MyWatchList :(",
+                        "Tidak ada item di List Transaksi :(",
                         style:
                         TextStyle(color: Color(0xff59A5D8), fontSize: 20),
                       ),
