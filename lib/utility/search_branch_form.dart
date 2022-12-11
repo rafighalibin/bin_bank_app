@@ -7,11 +7,11 @@ import 'package:bin_bank_app/page/history.dart';
 import '../model/globals.dart' as global;
 import 'package:bin_bank_app/utility/transactions_fetch.dart';
 
-class SearchRangeForm extends StatefulWidget {
-  const SearchRangeForm({super.key});
+class SearchBranchForm extends StatefulWidget {
+  const SearchBranchForm({super.key});
 
   @override
-  State<SearchRangeForm> createState() => _SearchRangeFormState();
+  State<SearchBranchForm> createState() => _SearchBranchFormState();
 }
 
 class Data {
@@ -20,10 +20,9 @@ class Data {
   Data({required this.feedback});
 }
 
-class _SearchRangeFormState extends State<SearchRangeForm> {
+class _SearchBranchFormState extends State<SearchBranchForm> {
   final _formKey = GlobalKey<FormState>();
-  final _min = TextEditingController();
-  final _max = TextEditingController();
+  final _branchName = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -41,10 +40,10 @@ class _SearchRangeFormState extends State<SearchRangeForm> {
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: TextFormField(
-                  controller: _min,
+                  controller: _branchName,
                   decoration: const InputDecoration(
                     border: OutlineInputBorder(),
-                    labelText: 'Minimal Kilogram',
+                    labelText: 'Nama Cabang',
                     enabledBorder: OutlineInputBorder(
                       borderSide: BorderSide(
                           color: Color.fromARGB(255, 56, 130, 214), width: 2.0),
@@ -54,30 +53,7 @@ class _SearchRangeFormState extends State<SearchRangeForm> {
                   ),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
-                      return 'Minimal Kilogram tidak bisa kosong';
-                    }
-                    return null;
-                  },
-                  style: TextStyle(color: Color.fromARGB(255, 56, 130, 214)),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: TextFormField(
-                  controller: _max,
-                  decoration: const InputDecoration(
-                    border: OutlineInputBorder(),
-                    labelText: 'Maksimal Kilogram',
-                    enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
-                          color: Color.fromARGB(255, 56, 130, 214), width: 2.0),
-                    ),
-                    labelStyle:
-                        TextStyle(color: Color.fromARGB(255, 56, 130, 214)),
-                  ),
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Maksimal Kilogram tidak bisa kosong';
+                      return 'Nama cabang tidak bisa kosong';
                     }
                     return null;
                   },
@@ -124,13 +100,13 @@ class _SearchRangeFormState extends State<SearchRangeForm> {
                     child: TextButton(
                       onPressed: () {
                         if (_formKey.currentState!.validate()) {
-                          global.list = fetchTransactionsRange(
-                              global.username, _min.text, _max.text);
+                          global.list = fetchTransactionsBranch(
+                              global.username, _branchName.text);
                           ScaffoldMessenger.of(context).showSnackBar(
                             const SnackBar(
                                 content: Text('Filter Berhasil diterapkan')),
                           );
-                          // sendSuggestion(_min.text);
+                          // sendSuggestion(_branchName.text);
                           Navigator.pushReplacement(
                             context,
                             MaterialPageRoute(

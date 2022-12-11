@@ -1,12 +1,16 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
+import 'package:bin_bank_app/main.dart';
 import 'package:flutter/material.dart';
-import 'package:bin_bank_app/utility/drawer.dart';
+import 'package:bin_bank_app/utility/drawer_user.dart';
+import 'package:bin_bank_app/utility/search_branch_form.dart';
 import 'package:bin_bank_app/utility/search_range_form.dart';
 import 'package:bin_bank_app/utility/transactions_fetch.dart';
 import 'package:bin_bank_app/utility/update_transaction.dart';
 import 'package:intl/intl.dart';
 import '../model/transactions.dart';
+import 'package:pbp_django_auth/pbp_django_auth.dart';
+import 'package:provider/provider.dart';
 import '../model/globals.dart' as global;
 
 class HistoryPage extends StatefulWidget {
@@ -16,6 +20,7 @@ class HistoryPage extends StatefulWidget {
   State<HistoryPage> createState() => _HistoryPageState();
 }
 
+// TODO: ini masih gabisa pas awal
 Future<List<Transactions>> list = fetchTransactions1(global.username);
 
 class _HistoryPageState extends State<HistoryPage> {
@@ -24,6 +29,14 @@ class _HistoryPageState extends State<HistoryPage> {
 
   @override
   Widget build(BuildContext context) {
+    final request = context.watch<CookieRequest>();
+    global.username = request.jsonData['username'];
+
+    print(list);
+    print(list == null);
+    if (list == null) {
+      list = fetchTransactions1(request.jsonData['username']);
+    }
     return Scaffold(
         appBar: AppBar(
           title: Row(
@@ -32,7 +45,7 @@ class _HistoryPageState extends State<HistoryPage> {
             ],
           ),
         ),
-        drawer: const MyDrawer(),
+        drawer: const MyDrawerUser(),
         floatingActionButton: Container(
           padding:
               const EdgeInsets.symmetric(vertical: 150.0, horizontal: 30.0),
@@ -43,7 +56,8 @@ class _HistoryPageState extends State<HistoryPage> {
               TextButton(
                 onPressed: () {
                   setState(() {
-                    list = fetchTransactionsOngoing(global.username);
+                    list =
+                        fetchTransactionsOngoing(request.jsonData['username']);
                     lastcall = "fetchTransactionsOngoing";
                     ScaffoldMessenger.of(context).showSnackBar(
                       const SnackBar(
@@ -75,7 +89,8 @@ class _HistoryPageState extends State<HistoryPage> {
               TextButton(
                 onPressed: () {
                   setState(() {
-                    list = fetchTransactionsSucces(global.username);
+                    list =
+                        fetchTransactionsSucces(request.jsonData['username']);
                     lastcall = "fetchTransactionsSucces";
                     ScaffoldMessenger.of(context).showSnackBar(
                       const SnackBar(
@@ -107,7 +122,7 @@ class _HistoryPageState extends State<HistoryPage> {
               TextButton(
                 onPressed: () {
                   setState(() {
-                    list = fetchTransactions1(global.username);
+                    list = fetchTransactions1(request.jsonData['username']);
                     lastcall = "fetchTransactions";
                     ScaffoldMessenger.of(context).showSnackBar(
                       const SnackBar(
@@ -138,7 +153,11 @@ class _HistoryPageState extends State<HistoryPage> {
               ),
               TextButton(
                 onPressed: () {
-                  // TODO
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const SearchRangeForm()),
+                  );
                 },
                 child: Container(
                     alignment: Alignment.center,
@@ -244,19 +263,20 @@ class _HistoryPageState extends State<HistoryPage> {
                                           fontWeight: FontWeight.bold)),
                                   TextButton(
                                     onPressed: () {
-                                      updateTransaction(global.username,
+                                      updateTransaction(
+                                          request.jsonData['username'],
                                           snapshot.data![index].pk);
                                       if (lastcall == "fetchTransactions") {
-                                        list =
-                                            fetchTransactions1(global.username);
+                                        list = fetchTransactions1(
+                                            request.jsonData['username']);
                                       } else if (lastcall ==
                                           "fetchTransactionsOngoing") {
                                         list = fetchTransactionsOngoing(
-                                            global.username);
+                                            request.jsonData['username']);
                                       } else if (lastcall ==
                                           "fetchTransactionsSucces") {
                                         list = fetchTransactionsSucces(
-                                            global.username);
+                                            request.jsonData['username']);
                                       }
                                       setState(() {});
                                     },

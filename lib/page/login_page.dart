@@ -1,4 +1,5 @@
 import 'package:bin_bank_app/main.dart';
+import 'package:bin_bank_app/page/history.dart';
 import 'package:bin_bank_app/utility/drawer_public.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -80,6 +81,7 @@ class _LoginPageState extends State<LoginPage> {
                   // Menggunakan padding sebesar 8 pixels
                   padding: const EdgeInsets.all(8.0),
                   child: TextFormField(
+                    obscureText: true,
                     decoration: InputDecoration(
                       labelText: "Password",
                       // Menambahkan circular border agar lebih rapi
@@ -117,7 +119,7 @@ class _LoginPageState extends State<LoginPage> {
                     backgroundColor: MaterialStateProperty.all(Colors.blue),
                   ),
                   onPressed: () async {
-                    final response = await request.post(
+                    final response = await request.login(
                         'https://bin-bank-pbp.up.railway.app/login/ajax', {
                       "username": username,
                       "password": password,
