@@ -2,10 +2,12 @@
 
 import 'package:flutter/material.dart';
 import 'package:bin_bank_app/utility/drawer.dart';
+import 'package:bin_bank_app/utility/search_range_form.dart';
 import 'package:bin_bank_app/utility/transactions_fetch.dart';
 import 'package:bin_bank_app/utility/update_transaction.dart';
 import 'package:intl/intl.dart';
 import '../model/transactions.dart';
+import '../model/globals.dart' as global;
 
 class HistoryPage extends StatefulWidget {
   const HistoryPage({Key? key}) : super(key: key);
@@ -14,11 +16,12 @@ class HistoryPage extends StatefulWidget {
   State<HistoryPage> createState() => _HistoryPageState();
 }
 
+Future<List<Transactions>> list = fetchTransactions1(global.username);
+
 class _HistoryPageState extends State<HistoryPage> {
   String lastcall = "fetchTransactions";
-  static String username = "maradona";
+  Future<List<Transactions>> list = global.list;
 
-  Future<List<Transactions>> list = fetchTransactions1(username);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,93 +33,165 @@ class _HistoryPageState extends State<HistoryPage> {
           ),
         ),
         drawer: const MyDrawer(),
-        floatingActionButton: Row(
-          children: [
-            TextButton(
-              onPressed: () {
-                setState(() {
-                  list = fetchTransactionsOngoing(username);
-                  lastcall = "fetchTransactionsOngoing";
-                });
-              },
-              child: Container(
-                  alignment: Alignment.center,
-                  height: 24,
-                  width: 164,
-                  decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      begin: Alignment.topLeft,
-                      end: Alignment(0.8, 1),
-                      colors: <Color>[
-                        Color.fromARGB(255, 6, 72, 254),
-                        Color.fromARGB(255, 0, 195, 255),
-                      ],
-                      tileMode: TileMode.mirror,
+        floatingActionButton: Container(
+          padding:
+              const EdgeInsets.symmetric(vertical: 150.0, horizontal: 30.0),
+          child: Column(
+            children: [
+              Text("Cari Transaksi",
+                  style: TextStyle(fontWeight: FontWeight.bold)),
+              TextButton(
+                onPressed: () {
+                  setState(() {
+                    list = fetchTransactionsOngoing(global.username);
+                    lastcall = "fetchTransactionsOngoing";
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                          content: Text('Filter Berhasil diterapkan')),
+                    );
+                  });
+                },
+                child: Container(
+                    alignment: Alignment.center,
+                    height: 24,
+                    width: 164,
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                        begin: Alignment.topLeft,
+                        end: Alignment(0.8, 1),
+                        colors: <Color>[
+                          Color.fromARGB(255, 6, 72, 254),
+                          Color.fromARGB(255, 0, 195, 255),
+                        ],
+                        tileMode: TileMode.mirror,
+                      ),
+                      borderRadius: BorderRadius.all(Radius.circular(40)),
                     ),
-                    borderRadius: BorderRadius.all(Radius.circular(40)),
-                  ),
-                  child: Text(
-                    'Sedang Berlangsung',
-                    style: TextStyle(color: Colors.white),
-                  )),
-            ),
-            TextButton(
-              onPressed: () {
-                setState(() {
-                  list = fetchTransactionsSucces(username);
-                  lastcall = "fetchTransactionsSucces";
-                });
-              },
-              child: Container(
-                  alignment: Alignment.center,
-                  height: 24,
-                  width: 164,
-                  decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      begin: Alignment.topLeft,
-                      end: Alignment(0.8, 1),
-                      colors: <Color>[
-                        Color.fromARGB(255, 6, 72, 254),
-                        Color.fromARGB(255, 0, 195, 255),
-                      ],
-                      tileMode: TileMode.mirror,
+                    child: Text(
+                      'Sedang Berlangsung',
+                      style: TextStyle(color: Colors.white),
+                    )),
+              ),
+              TextButton(
+                onPressed: () {
+                  setState(() {
+                    list = fetchTransactionsSucces(global.username);
+                    lastcall = "fetchTransactionsSucces";
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                          content: Text('Filter Berhasil diterapkan')),
+                    );
+                  });
+                },
+                child: Container(
+                    alignment: Alignment.center,
+                    height: 24,
+                    width: 164,
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                        begin: Alignment.topLeft,
+                        end: Alignment(0.8, 1),
+                        colors: <Color>[
+                          Color.fromARGB(255, 6, 72, 254),
+                          Color.fromARGB(255, 0, 195, 255),
+                        ],
+                        tileMode: TileMode.mirror,
+                      ),
+                      borderRadius: BorderRadius.all(Radius.circular(40)),
                     ),
-                    borderRadius: BorderRadius.all(Radius.circular(40)),
-                  ),
-                  child: Text(
-                    'Berhasil',
-                    style: TextStyle(color: Colors.white),
-                  )),
-            ),
-            TextButton(
-              onPressed: () {
-                setState(() {
-                  list = fetchTransactions1(username);
-                  lastcall = "fetchTransactions";
-                });
-              },
-              child: Container(
-                  alignment: Alignment.center,
-                  height: 24,
-                  width: 164,
-                  decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      begin: Alignment.topLeft,
-                      end: Alignment(0.8, 1),
-                      colors: <Color>[
-                        Color.fromARGB(255, 6, 72, 254),
-                        Color.fromARGB(255, 0, 195, 255),
-                      ],
-                      tileMode: TileMode.mirror,
+                    child: Text(
+                      'Berhasil',
+                      style: TextStyle(color: Colors.white),
+                    )),
+              ),
+              TextButton(
+                onPressed: () {
+                  setState(() {
+                    list = fetchTransactions1(global.username);
+                    lastcall = "fetchTransactions";
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                          content: Text('Filter Berhasil diterapkan')),
+                    );
+                  });
+                },
+                child: Container(
+                    alignment: Alignment.center,
+                    height: 24,
+                    width: 164,
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                        begin: Alignment.topLeft,
+                        end: Alignment(0.8, 1),
+                        colors: <Color>[
+                          Color.fromARGB(255, 6, 72, 254),
+                          Color.fromARGB(255, 0, 195, 255),
+                        ],
+                        tileMode: TileMode.mirror,
+                      ),
+                      borderRadius: BorderRadius.all(Radius.circular(40)),
                     ),
-                    borderRadius: BorderRadius.all(Radius.circular(40)),
-                  ),
-                  child: Text(
-                    'Semua',
-                    style: TextStyle(color: Colors.white),
-                  )),
-            ),
-          ],
+                    child: Text(
+                      'Semua',
+                      style: TextStyle(color: Colors.white),
+                    )),
+              ),
+              TextButton(
+                onPressed: () {
+                  // TODO
+                },
+                child: Container(
+                    alignment: Alignment.center,
+                    height: 24,
+                    width: 164,
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                        begin: Alignment.topLeft,
+                        end: Alignment(0.8, 1),
+                        colors: <Color>[
+                          Color.fromARGB(255, 6, 72, 254),
+                          Color.fromARGB(255, 0, 195, 255),
+                        ],
+                        tileMode: TileMode.mirror,
+                      ),
+                      borderRadius: BorderRadius.all(Radius.circular(40)),
+                    ),
+                    child: Text(
+                      'Berdasarkan Berat',
+                      style: TextStyle(color: Colors.white),
+                    )),
+              ),
+              TextButton(
+                onPressed: () {
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const SearchBranchForm()),
+                  );
+                },
+                child: Container(
+                    alignment: Alignment.center,
+                    height: 24,
+                    width: 164,
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                        begin: Alignment.topLeft,
+                        end: Alignment(0.8, 1),
+                        colors: <Color>[
+                          Color.fromARGB(255, 6, 72, 254),
+                          Color.fromARGB(255, 0, 195, 255),
+                        ],
+                        tileMode: TileMode.mirror,
+                      ),
+                      borderRadius: BorderRadius.all(Radius.circular(40)),
+                    ),
+                    child: Text(
+                      'Berdasarkan Cabang',
+                      style: TextStyle(color: Colors.white),
+                    )),
+              ),
+            ],
+          ),
         ),
         body: FutureBuilder(
             future: list,
@@ -124,13 +199,14 @@ class _HistoryPageState extends State<HistoryPage> {
               if (snapshot.data == null) {
                 return const Center(child: CircularProgressIndicator());
               } else {
-                if (!snapshot.hasData) {
+                if (snapshot.data.length == 0) {
                   return Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: const [
                       Text(
                         "Oops, nggak ada transaksi yang sesuai filter",
                         style: TextStyle(
-                            color: Color.fromARGB(255, 0, 0, 0),
+                            color: Color.fromARGB(255, 6, 72, 254),
                             fontSize: 20,
                             fontWeight: FontWeight.bold),
                       ),
@@ -168,18 +244,19 @@ class _HistoryPageState extends State<HistoryPage> {
                                           fontWeight: FontWeight.bold)),
                                   TextButton(
                                     onPressed: () {
-                                      updateTransaction(
-                                          username, snapshot.data![index].pk);
+                                      updateTransaction(global.username,
+                                          snapshot.data![index].pk);
                                       if (lastcall == "fetchTransactions") {
-                                        list = fetchTransactions1(username);
+                                        list =
+                                            fetchTransactions1(global.username);
                                       } else if (lastcall ==
                                           "fetchTransactionsOngoing") {
-                                        list =
-                                            fetchTransactionsOngoing(username);
+                                        list = fetchTransactionsOngoing(
+                                            global.username);
                                       } else if (lastcall ==
                                           "fetchTransactionsSucces") {
-                                        list =
-                                            fetchTransactionsSucces(username);
+                                        list = fetchTransactionsSucces(
+                                            global.username);
                                       }
                                       setState(() {});
                                     },
