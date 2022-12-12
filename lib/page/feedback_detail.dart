@@ -1,5 +1,9 @@
-import 'package:flutter/material.dart';
 import 'package:bin_bank_app/utility/drawer_public.dart';
+import 'package:bin_bank_app/utility/drawer_user.dart';
+import 'package:flutter/material.dart';
+import 'package:pbp_django_auth/pbp_django_auth.dart';
+import 'package:provider/provider.dart';
+import 'package:bin_bank_app/app_styles.dart';
 import 'package:bin_bank_app/utility/feedback_fetch.dart';
 
 class FeedbackDetailPage extends StatefulWidget {
@@ -10,13 +14,23 @@ class FeedbackDetailPage extends StatefulWidget {
 }
 
 class _FeedbackDetailState extends State<FeedbackDetailPage> {
+  Widget getWidget() {
+    final request = context.watch<CookieRequest>();
+
+    if (request.jsonData['username'] == null) {
+      return const MyDrawerPublic();
+    } else {
+      return const MyDrawerUser();
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: const Text('Feedback Detail'),
+          title: const Text('Testimonials'),
         ),
-        drawer: const MyDrawerPublic(),
+        drawer: getWidget(),
         body: FutureBuilder(
             future: fetchFeedback(),
             builder: (context, AsyncSnapshot snapshot) {
@@ -27,7 +41,7 @@ class _FeedbackDetailState extends State<FeedbackDetailPage> {
                   return Column(
                     children: const [
                       Text(
-                        "Tidak ada feedback :(",
+                        "We have no testimonials :(",
                         style:
                             TextStyle(color: Color(0xff59A5D8), fontSize: 20),
                       ),
@@ -57,6 +71,13 @@ class _FeedbackDetailState extends State<FeedbackDetailPage> {
                                   style: const TextStyle(
                                     fontSize: 18.0,
                                     fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                Text(
+                                  "Posted at: ${snapshot.data![index].fields.date}",
+                                  style: const TextStyle(
+                                    fontSize: 12.0,
+                                    color: kLightGrey,
                                   ),
                                 ),
                                 Text(

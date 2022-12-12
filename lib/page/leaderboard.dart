@@ -102,7 +102,7 @@ class _MyFormPageState extends State<LeaderboardPage> {
                         return Column(
                           children: const [
                             Text(
-                              "Tidak ada to do list :(",
+                              "Tidak ada orang di leaderboard.",
                               style: TextStyle(
                                   color: Color(0xff59A5D8), fontSize: 20),
                             ),
@@ -169,30 +169,6 @@ class _MyFormPageState extends State<LeaderboardPage> {
                     }
                   }),
             ),
-            if (isInLeaderboard)
-              Container(
-                alignment: Alignment.center,
-                child: Text(
-                    'Selamat, $username! kamu berada di peringkat $positionInLeaderboard! Pertahankan peringkatmu dengan tetap melakukan donasi sampah!',
-                    textAlign: TextAlign.center,
-                    style: const TextStyle(fontSize: 15)),
-              ),
-            if (!isInLeaderboard && isAuthenticated)
-              Container(
-                alignment: Alignment.center,
-                child: const Text(
-                    'Wah, poin kamu belum cukup untuk masuk leaderboard. Tingkatkan poinmu dengan melakukan donasi sampah!',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(fontSize: 15)),
-              ),
-            if (!isAuthenticated)
-              Container(
-                alignment: Alignment.center,
-                child: const Text(
-                    'Kamu belum login. Silakan login untuk melihat peringkatmu di leaderboard.',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(fontSize: 15)),
-              ),
             const SizedBox(height: 40),
             Container(
               alignment: Alignment.center,
@@ -217,7 +193,7 @@ class _MyFormPageState extends State<LeaderboardPage> {
                       return Column(
                         children: const [
                           Text(
-                            "Tidak ada to do list :(",
+                            "Tidak ada support message :(",
                             style: TextStyle(
                                 color: Color(0xff59A5D8), fontSize: 20),
                           ),

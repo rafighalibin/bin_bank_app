@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:bin_bank_app/main.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:provider/provider.dart';
+import 'package:bin_bank_app/page/homepage.dart';
 
 class MyDrawerUser extends StatelessWidget {
 
@@ -92,4 +93,5 @@ class MyDrawerUser extends StatelessWidget {
           ],
         ));
   }
+
 }
