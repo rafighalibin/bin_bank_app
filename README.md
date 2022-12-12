@@ -22,7 +22,7 @@ Masalah sampah di Indonesia masih menjadi polemik hingga menjadi salah satu isu 
 
 **1. Home 		: Amanda Christie Tarigan**
 
--> Merupakan welcoming page yang berisi penjelasan singkat aplikasi Bin Bank, menampilkan artikel, jumlah penerimaan sampah, location, dan form feedback. Cara pengintegrasiannya adalah sebagai berikut. Karena halaman ini akan menampilkan artikel dan  jumlah penerimaan sampah berdasarkan  jumlah donasi semua user, maka pengintegrasiannya dilakukan dengan HTTP get untuk mengambil data-data tersebut dan ditampilkan di aplikasi. Selain itu, user juga dapat mengirim feedback untuk testimoni dan evaluasi bagi Bin Bank melalui form yang akan dikirim dengan HTTP Post.  Feedback message diambil dengan HTTP get dari server dan ditampilkan di aplikasi.
+-> Merupakan welcoming page yang berisi penjelasan singkat aplikasi Bin Bank, menampilkan artikel, jumlah penerimaan sampah, location, dan form feedback. Cara pengintegrasiannya adalah sebagai berikut. Pada halaman ini, user dapat mengirim feedback untuk testimoni dan evaluasi bagi Bin Bank melalui form yang akan dikirim dengan HTTP Post. Feedback message diambil dengan HTTP get dari server dan ditampilkan di aplikasi.
 
 **2. Authentication	: Syifa Afra Kamila Mumtaz**
 
