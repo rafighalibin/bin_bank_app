@@ -41,7 +41,7 @@ class _HistoryPageState extends State<HistoryPage> {
         body: Column(
           children: [
             Container(
-              padding: EdgeInsets.fromLTRB(0, 0, 20, 30),
+              padding: EdgeInsets.fromLTRB(0, 30, 0, 20),
               child: Column(
                 children: [
                   Container(
@@ -49,11 +49,11 @@ class _HistoryPageState extends State<HistoryPage> {
                     child: Text("Cari Transaksi",
                         style: TextStyle(
                             fontWeight: FontWeight.bold,
-                            fontSize: 60,
+                            fontSize: 40,
                             color: Color.fromARGB(255, 49, 49, 49))),
                   ),
                   Container(
-                    padding: EdgeInsets.fromLTRB(0, 20, 0, 10),
+                    padding: EdgeInsets.fromLTRB(0, 20, 0, 0),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -75,7 +75,7 @@ class _HistoryPageState extends State<HistoryPage> {
                           },
                           child: Container(
                               alignment: Alignment.center,
-                              height: 24,
+                              height: 30,
                               width: 164,
                               decoration: BoxDecoration(
                                 gradient: LinearGradient(
@@ -113,7 +113,7 @@ class _HistoryPageState extends State<HistoryPage> {
                           },
                           child: Container(
                               alignment: Alignment.center,
-                              height: 24,
+                              height: 30,
                               width: 164,
                               decoration: BoxDecoration(
                                 gradient: LinearGradient(
@@ -137,48 +137,10 @@ class _HistoryPageState extends State<HistoryPage> {
                     ),
                   ),
                   Container(
-                    padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
+                    padding: EdgeInsets.fromLTRB(0, 20, 0, 0),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        TextButton(
-                          onPressed: () {
-                            global.counter++;
-                            global.list = fetchTransactions1(
-                                request.jsonData['username']);
-                            setState(() {
-                              list = fetchTransactions1(
-                                  request.jsonData['username']);
-                              lastcall = "fetchTransactions";
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                const SnackBar(
-                                    content:
-                                        Text('Filter Berhasil diterapkan')),
-                              );
-                            });
-                          },
-                          child: Container(
-                              alignment: Alignment.center,
-                              height: 24,
-                              width: 164,
-                              decoration: BoxDecoration(
-                                gradient: LinearGradient(
-                                  begin: Alignment.topLeft,
-                                  end: Alignment(0.8, 1),
-                                  colors: <Color>[
-                                    Color.fromARGB(255, 6, 72, 254),
-                                    Color.fromARGB(255, 0, 195, 255),
-                                  ],
-                                  tileMode: TileMode.mirror,
-                                ),
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(40)),
-                              ),
-                              child: Text(
-                                'Semua',
-                                style: TextStyle(color: Colors.white),
-                              )),
-                        ),
                         TextButton(
                           onPressed: () {
                             Navigator.pushReplacement(
@@ -190,7 +152,7 @@ class _HistoryPageState extends State<HistoryPage> {
                           },
                           child: Container(
                               alignment: Alignment.center,
-                              height: 24,
+                              height: 30,
                               width: 164,
                               decoration: BoxDecoration(
                                 gradient: LinearGradient(
@@ -221,7 +183,7 @@ class _HistoryPageState extends State<HistoryPage> {
                           },
                           child: Container(
                               alignment: Alignment.center,
-                              height: 24,
+                              height: 30,
                               width: 164,
                               decoration: BoxDecoration(
                                 gradient: LinearGradient(
@@ -243,7 +205,46 @@ class _HistoryPageState extends State<HistoryPage> {
                         ),
                       ],
                     ),
-                  )
+                  ),
+                  Container(
+                    padding: EdgeInsets.fromLTRB(0, 20, 0, 0),
+                    child: TextButton(
+                      onPressed: () {
+                        global.counter++;
+                        global.list =
+                            fetchTransactions1(request.jsonData['username']);
+                        setState(() {
+                          list =
+                              fetchTransactions1(request.jsonData['username']);
+                          lastcall = "fetchTransactions";
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                                content: Text('Filter Berhasil diterapkan')),
+                          );
+                        });
+                      },
+                      child: Container(
+                          alignment: Alignment.center,
+                          height: 30,
+                          width: 104,
+                          decoration: BoxDecoration(
+                            gradient: LinearGradient(
+                              begin: Alignment.topLeft,
+                              end: Alignment(0.8, 1),
+                              colors: <Color>[
+                                Color.fromARGB(255, 6, 72, 254),
+                                Color.fromARGB(255, 0, 195, 255),
+                              ],
+                              tileMode: TileMode.mirror,
+                            ),
+                            borderRadius: BorderRadius.all(Radius.circular(40)),
+                          ),
+                          child: Text(
+                            'Semua',
+                            style: TextStyle(color: Colors.white),
+                          )),
+                    ),
+                  ),
                 ],
               ),
             ),
@@ -323,7 +324,7 @@ class _HistoryPageState extends State<HistoryPage> {
                                             },
                                             child: Container(
                                                 alignment: Alignment.center,
-                                                height: 24,
+                                                height: 30,
                                                 width: 164,
                                                 decoration: BoxDecoration(
                                                   gradient: LinearGradient(
