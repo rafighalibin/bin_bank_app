@@ -23,7 +23,12 @@ class LeaderboardPage extends StatefulWidget {
 
 class _MyFormPageState extends State<LeaderboardPage> {
   final _formKey = GlobalKey<FormState>();
-  String judul = "";
+  String message = "";
+  final fieldText = TextEditingController();
+  void clearText() {
+    fieldText.clear();
+  }
+
   bool isInLeaderboard = false;
   bool isAuthenticated = false;
   int positionInLeaderboard = 0;
@@ -32,13 +37,11 @@ class _MyFormPageState extends State<LeaderboardPage> {
     final request = context.watch<CookieRequest>();
     username = request.jsonData['username'];
     if (username == null) {
-      print(isAuthenticated);
       return null;
     } else {
       if (isAuthenticated == false) {
         isAuthenticated = true;
       }
-      print("AuthCheck: $isAuthenticated");
       return username;
     }
   }
@@ -294,14 +297,15 @@ class _MyFormPageState extends State<LeaderboardPage> {
                           ),
                           keyboardType: TextInputType.multiline,
                           maxLines: 4,
+                          controller: fieldText,
                           // Menambahkan behavior saat nama diketik
                           onChanged: (String? value) {
-                            judul = value!;
+                            message = value!;
                           },
                           // Menambahkan behavior saat data disimpan
                           onSaved: (String? value) {
                             setState(() {
-                              judul = value!;
+                              message = value!;
                             });
                           },
                           // Validator sebagai validasi form
@@ -321,7 +325,15 @@ class _MyFormPageState extends State<LeaderboardPage> {
                           ),
                           onPressed: () {
                             if (_formKey.currentState!.validate()) {
-                              sendSupportMessage(username!, judul);
+                              sendSupportMessage(username!, message);
+                              clearText();
+                              setState(() {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  const SnackBar(
+                                      content: Text(
+                                          'Support message berhasil dikirim')),
+                                );
+                              });
                             }
                           },
                           child: const Text(
