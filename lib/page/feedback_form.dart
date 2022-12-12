@@ -23,18 +23,11 @@ class _MyFormPageState extends State<MyFormPage> {
   String feedback = "";
 
   void _initFeedback(request) async {
-    var data = convert.jsonEncode(
-      <String, dynamic>{
-        "user": request.jsonData['username'],
-        "subject": subject,
-        "feedback": feedback,
-      },
-    );
-
     //final response = await http.post("http://127.0.0.1:8000/post-feedback-json/",
     //headers: {"Content-Type": "application/json"}, body: data);
 
-    var url = Uri.parse('http://127.0.0.1:8000/post-feedback-json/');
+    var url =
+        Uri.parse('https://bin-bank-pbp.up.railway.app/post-feedback-json/');
     Map<String, String> requestBody = <String, String>{
       "user": request.jsonData['username'],
       "subject": subject,
