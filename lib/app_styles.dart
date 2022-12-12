@@ -27,10 +27,20 @@ final kPoppinsBold = GoogleFonts.poppins(
   fontWeight: FontWeight.w700,
 );
 
+final kPoppinsBoldBig = GoogleFonts.poppins(
+  color: kDarkBlue,
+  fontWeight: FontWeight.w700,
+  fontSize: 40,
+);
+
 final kPoppinsSemibold = GoogleFonts.poppins(
   color: kDarkBlue,
   fontWeight: FontWeight.w600,
 );
+final kPoppinsSemiboldLightBlue = GoogleFonts.poppins(
+  color: kLightBlue,
+  fontWeight: FontWeight.w600,
+); 
 
 final kPoppinsMedium = GoogleFonts.poppins(
   color: kDarkBlue,
