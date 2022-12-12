@@ -74,6 +74,13 @@ class _FeedbackDetailState extends State<FeedbackDetailPage> {
                                   ),
                                 ),
                                 Text(
+                                  "Posted at: ${snapshot.data![index].fields.date}",
+                                  style: const TextStyle(
+                                    fontSize: 12.0,
+                                    color: kLightGrey,
+                                  ),
+                                ),
+                                Text(
                                   "${snapshot.data![index].fields.feedback}",
                                   style: const TextStyle(
                                     fontSize: 18.0,

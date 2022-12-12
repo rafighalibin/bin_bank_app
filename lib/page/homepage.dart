@@ -31,7 +31,7 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: const Text("BinBank"),
+          title: const Text("Bin Bank"),
         ),
         drawer: getWidget(),
         body: Center(
@@ -79,6 +79,73 @@ class _HomeState extends State<Home> {
                             fontSize: 18,
                           ),
                         )
+                      ],
+                    ),
+                  ),
+                  Card(
+                    margin: const EdgeInsets.all(10),
+                    elevation: 20,
+                    shape: const RoundedRectangleBorder(
+                        side: BorderSide(color: kLightBlue, width: 3),
+                        borderRadius: BorderRadius.all(Radius.circular(15))),
+                    shadowColor: kLightGrey,
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: const <Widget>[
+                        ListTile(
+                          leading: Icon(Icons.check_circle,
+                              color: Colors.cyan, size: 45),
+                          title: Text(
+                            "Practical",
+                            style: TextStyle(fontSize: 16),
+                          ),
+                          subtitle: Text('Data management is done digitally'),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Card(
+                    margin: const EdgeInsets.all(10),
+                    elevation: 20,
+                    shape: const RoundedRectangleBorder(
+                        side: BorderSide(color: kLightBlue, width: 3),
+                        borderRadius: BorderRadius.all(Radius.circular(15))),
+                    shadowColor: kLightGrey,
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: const <Widget>[
+                        ListTile(
+                          leading: Icon(Icons.check_circle,
+                              color: Colors.cyan, size: 45),
+                          title: Text(
+                            "National integrated",
+                            style: TextStyle(fontSize: 16),
+                          ),
+                          subtitle: Text('Monitoring waste management'),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Card(
+                    margin: const EdgeInsets.all(10),
+                    elevation: 20,
+                    shape: const RoundedRectangleBorder(
+                        side: BorderSide(color: kLightBlue, width: 3),
+                        borderRadius: BorderRadius.all(Radius.circular(15))),
+                    shadowColor: kLightGrey,
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: const <Widget>[
+                        ListTile(
+                          leading: Icon(Icons.check_circle,
+                              color: Colors.cyan, size: 45),
+                          title: Text(
+                            "Secured",
+                            style: TextStyle(fontSize: 16),
+                          ),
+                          subtitle:
+                              Text('Guarantees the security of user data'),
+                        ),
                       ],
                     ),
                   ),
