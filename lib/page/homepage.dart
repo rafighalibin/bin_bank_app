@@ -1,4 +1,3 @@
-import 'package:bin_bank_app/page/login_page.dart';
 import 'package:bin_bank_app/utility/drawer_public.dart';
 import 'package:bin_bank_app/utility/drawer_user.dart';
 import 'package:flutter/material.dart';
@@ -7,6 +6,7 @@ import 'package:provider/provider.dart';
 import 'package:bin_bank_app/app_styles.dart';
 import 'package:bin_bank_app/page/feedback_form.dart';
 import 'package:bin_bank_app/page/feedback_detail.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key, required String title});
@@ -29,24 +29,6 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
-    List<String> articleTitle = [
-      'E-waste management must get policy priority',
-      'How Can We Solve The Growing E-Waste Problem?',
-      'Jubir G20 Sebut Permasalahan Sampah Menumpuk di Indonesia',
-    ];
-
-    List<String> publisher = [
-      'NEW AGE',
-      'EPOLINE',
-      'KBR',
-    ];
-
-    List<String> images = [
-      'waste-1.jpg',
-      'waste-2.jpg',
-      'waste-3.jpg',
-    ];
-
     return Scaffold(
         appBar: AppBar(
           title: const Text("BinBank"),
@@ -59,7 +41,7 @@ class _HomeState extends State<Home> {
               child: Column(
                 children: [
                   Padding(
-                    padding: const EdgeInsets.all(8.0),
+                    padding: const EdgeInsets.all(2.0),
                     child: Text('Welcome to Bin Bank',
                         style: kPoppinsBold.copyWith(
                           fontSize: 22,
@@ -78,14 +60,40 @@ class _HomeState extends State<Home> {
                     height: 10,
                   ),
                   Container(
-                    height: 35,
+                    height: 40,
+                    padding: const EdgeInsets.all(8.0),
+                    child: Row(
+                      children: [
+                        Text(
+                          'Why Us?',
+                          style: kPoppinsBold.copyWith(
+                            fontSize: 18,
+                          ),
+                        ),
+                        const SizedBox(
+                          width: 10,
+                        ),
+                        Text(
+                          '🤔',
+                          style: kPoppinsBold.copyWith(
+                            fontSize: 18,
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  Container(
+                    height: 40,
                     padding: const EdgeInsets.all(8.0),
                     child: Row(
                       children: [
                         Text(
                           'Article',
                           style: kPoppinsBold.copyWith(
-                            fontSize: 14,
+                            fontSize: 18,
                           ),
                         ),
                         const SizedBox(
@@ -94,14 +102,115 @@ class _HomeState extends State<Home> {
                         Text(
                           '📰',
                           style: kPoppinsBold.copyWith(
-                            fontSize: 12,
+                            fontSize: 18,
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                  CarouselSlider(
+                    items: [
+                      //1st Image of Slider
+                      Container(
+                        margin: const EdgeInsets.all(6.0),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(8.0),
+                          image: const DecorationImage(
+                            image: AssetImage("assets/waste-1.jpg"),
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                      ),
+
+                      //2nd Image of Slider
+                      Container(
+                        margin: const EdgeInsets.all(6.0),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(8.0),
+                          image: const DecorationImage(
+                            image: AssetImage("assets/waste-2.jpg"),
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                      ),
+
+                      //3rd Image of Slider
+                      Container(
+                        margin: const EdgeInsets.all(6.0),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(8.0),
+                          image: const DecorationImage(
+                            image: AssetImage("assets/waste-3.jpg"),
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                      ),
+
+                      //4th Image of Slider
+                      Container(
+                        margin: const EdgeInsets.all(6.0),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(8.0),
+                          image: const DecorationImage(
+                            image: AssetImage("assets/waste-1.jpg"),
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                      ),
+
+                      //5th Image of Slider
+                      Container(
+                        margin: const EdgeInsets.all(6.0),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(8.0),
+                          image: const DecorationImage(
+                            image: AssetImage("assets/waste-2.jpg"),
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                      ),
+                    ],
+
+                    //Slider Container properties
+                    options: CarouselOptions(
+                      height: 180.0,
+                      enlargeCenterPage: true,
+                      autoPlay: true,
+                      aspectRatio: 16 / 9,
+                      autoPlayCurve: Curves.fastOutSlowIn,
+                      enableInfiniteScroll: true,
+                      autoPlayAnimationDuration: Duration(milliseconds: 800),
+                      viewportFraction: 0.8,
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  Container(
+                    height: 40,
+                    padding: const EdgeInsets.all(8.0),
+                    child: Row(
+                      children: [
+                        Text(
+                          'Testimonials',
+                          style: kPoppinsBold.copyWith(
+                            fontSize: 18,
+                          ),
+                        ),
+                        const SizedBox(
+                          width: 10,
+                        ),
+                        Text(
+                          '✍🏻',
+                          style: kPoppinsBold.copyWith(
+                            fontSize: 18,
                           ),
                         )
                       ],
                     ),
                   ),
                   const SizedBox(
-                    height: 30,
+                    height: 25,
                   ),
                   TextButton(
                     style: ButtonStyle(
@@ -117,7 +226,7 @@ class _HomeState extends State<Home> {
                     child: const Text('Give Feedback'),
                   ),
                   const SizedBox(
-                    height: 30,
+                    height: 5,
                   ),
                   TextButton(
                     style: ButtonStyle(
@@ -131,7 +240,7 @@ class _HomeState extends State<Home> {
                               builder: (context) =>
                                   const FeedbackDetailPage()));
                     },
-                    child: const Text('Show All Feedbacks'),
+                    child: const Text('Show All Testimonials'),
                   ),
                 ],
               ),
