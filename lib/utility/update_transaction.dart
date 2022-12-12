@@ -13,3 +13,18 @@ void updateTransaction(String user, int pk) async {
   final respStr = await response.stream.bytesToString();
   var encoded = json.decode(respStr);
 }
+
+Future<http.Response> addTransaction(
+    String username, int amountKg, String branchName) async {
+  var url = Uri.parse(
+      'https://bin-bank-pbp.up.railway.app/leaderboard/add-transaction-post');
+  var response = await http.post(url, headers: <String, String>{
+    // 'Content-Type': 'application/json; charset=UTF-8',
+  }, body: {
+    "user": username,
+    "amountKg": amountKg,
+    "branchName": branchName,
+  });
+  return response;
+}
+
