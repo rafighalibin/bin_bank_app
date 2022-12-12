@@ -22,16 +22,14 @@ class MyDepositPage extends StatefulWidget {
   State<MyDepositPage> createState() => _MyDepositPageState();
 }
 
-Future<List<Transactions>> list = fetchTransactions1(global.username);
-
 class _MyDepositPageState extends State<MyDepositPage> {
   final _formKey = GlobalKey<FormState>();
   int _amountKg = 0;
   String _branchName = "";
   String dropdownValue = "branch_1";
 
+  Future<List<Transactions>> list = fetchTransactions1(global.username);
   String lastcall = "fetchTransactions";
-  Future<List<Transactions>> list = global.list;
 
   @override
   Widget build(BuildContext context) {
@@ -131,47 +129,6 @@ class _MyDepositPageState extends State<MyDepositPage> {
                                   Text('Sedang Berlangsung',
                                       style: TextStyle(
                                           fontWeight: FontWeight.bold)),
-                                  TextButton(
-                                    onPressed: () {
-                                      updateTransaction(
-                                          request.jsonData['username'],
-                                          snapshot.data![index].pk);
-                                      if (lastcall == "fetchTransactions") {
-                                        list = fetchTransactions1(
-                                            request.jsonData['username']);
-                                      } else if (lastcall ==
-                                          "fetchTransactionsOngoing") {
-                                        list = fetchTransactionsOngoing(
-                                            request.jsonData['username']);
-                                      } else if (lastcall ==
-                                          "fetchTransactionsSucces") {
-                                        list = fetchTransactionsSucces(
-                                            request.jsonData['username']);
-                                      }
-                                      setState(() {});
-                                    },
-                                    child: Container(
-                                        alignment: Alignment.center,
-                                        height: 24,
-                                        width: 164,
-                                        decoration: BoxDecoration(
-                                          gradient: LinearGradient(
-                                            begin: Alignment.topLeft,
-                                            end: Alignment(0.8, 1),
-                                            colors: <Color>[
-                                              Color.fromARGB(255, 6, 72, 254),
-                                              Color.fromARGB(255, 0, 195, 255),
-                                            ],
-                                            tileMode: TileMode.mirror,
-                                          ),
-                                          borderRadius: BorderRadius.all(
-                                              Radius.circular(40)),
-                                        ),
-                                        child: Text(
-                                          'Selesaikan Transaksi',
-                                          style: TextStyle(color: Colors.white),
-                                        )),
-                                  )
                                 ] else ...[
                                   Text(
                                       '${snapshot.data![index].fields.amountKg}Kg (${DateFormat('yyyy-MM-dd kk:mm').format(snapshot.data![index].fields.date)})',
@@ -189,9 +146,8 @@ class _MyDepositPageState extends State<MyDepositPage> {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) =>
-                                        DepositDetails(
-                                            transactionItem:
+                                    builder: (context) => DepositDetails(
+                                        transactionItem:
                                             snapshot.data![index])),
                               );
                             }),
