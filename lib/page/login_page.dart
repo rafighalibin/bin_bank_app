@@ -1,5 +1,6 @@
 import 'package:bin_bank_app/main.dart';
 import 'package:bin_bank_app/page/history.dart';
+import 'package:bin_bank_app/page/homepage.dart';
 import 'package:bin_bank_app/utility/drawer_public.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -129,7 +130,7 @@ class _LoginPageState extends State<LoginPage> {
                           context,
                           MaterialPageRoute(
                             builder: (BuildContext context) =>
-                                const MyHomePage(title: "..."),
+                                const Home(title: "Bin Bank"),
                           ));
                     } else {
                       setState(() {

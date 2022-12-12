@@ -1,5 +1,5 @@
 // ignore_for_file: constant_identifier_names, use_build_context_synchronously
-
+import 'package:bin_bank_app/page/homepage.dart';
 import 'dart:convert';
 import 'package:bin_bank_app/main.dart';
 import 'package:flutter/material.dart';
@@ -22,7 +22,6 @@ class _RegisterPageState extends State<RegisterPage> {
   String password2 = "";
   String? message;
 
-
   @override
   Widget build(BuildContext context) {
     final request = context.watch<CookieRequest>();
@@ -35,7 +34,9 @@ class _RegisterPageState extends State<RegisterPage> {
             padding: const EdgeInsets.all(20.0),
             child: Column(
               children: [
-                SizedBox(height: 20,),
+                SizedBox(
+                  height: 20,
+                ),
                 Text(
                   "Sign Up to JoyfulTimes",
                   style: TextStyle(
@@ -153,26 +154,26 @@ class _RegisterPageState extends State<RegisterPage> {
                     ),
                     TextButton(
                       child: const Text(
-                      "Simpan",
-                      style: TextStyle(color: Colors.white),
+                        "Simpan",
+                        style: TextStyle(color: Colors.white),
                       ),
                       style: ButtonStyle(
-                      backgroundColor: MaterialStateProperty.all(Colors.blue),
+                        backgroundColor: MaterialStateProperty.all(Colors.blue),
                       ),
-
                       onPressed: () async {
                         final response = await request.post(
-                          'https://bin-bank-pbp.up.railway.app/register/ajax',
-                          {
-                            "username": username,
-                            "password1": password1,
-                            "password2": password2,
-                          });     
-                        if (response['status']==true) {
+                            'https://bin-bank-pbp.up.railway.app/register/ajax',
+                            {
+                              "username": username,
+                              "password1": password1,
+                              "password2": password2,
+                            });
+                        if (response['status'] == true) {
                           Navigator.pushReplacement(
                               context,
                               MaterialPageRoute(
-                                builder: (BuildContext context) => const MyHomePage(title: "..."),
+                                builder: (BuildContext context) =>
+                                    const LoginPage(),
                               ));
                         } else {
                           setState(() {
@@ -180,12 +181,12 @@ class _RegisterPageState extends State<RegisterPage> {
                           });
                         }
                       },
-                  ),
-                  Center(
-                    child: Text(message ?? "",
-                                style: const TextStyle(color: Colors.blue, fontSize: 16),)),
-          
-        
+                    ),
+                    Center(
+                        child: Text(
+                      message ?? "",
+                      style: const TextStyle(color: Colors.blue, fontSize: 16),
+                    )),
                     Text("Sudah mempunyai akun?"),
                     TextButton(
                       onPressed: () {

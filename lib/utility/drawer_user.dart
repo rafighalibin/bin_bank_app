@@ -6,6 +6,7 @@ import 'package:bin_bank_app/main.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:provider/provider.dart';
 import 'package:bin_bank_app/page/homepage.dart';
+import 'package:bin_bank_app/utility/header_drawer.dart';
 
 class MyDrawerUser extends StatelessWidget {
   const MyDrawerUser({Key? key}) : super(key: key);
@@ -26,6 +27,7 @@ class MyDrawerUser extends StatelessWidget {
       child: Wrap(
         runSpacing: 12,
         children: [
+          const MyHeaderDrawer(),
           ListTile(
             title: const Text('HomePage'),
             onTap: () {
