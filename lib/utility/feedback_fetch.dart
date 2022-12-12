@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:bin_bank_app/model/feedback.dart';
 
 Future<List<Feedback>> fetchFeedback() async {
-  var url = Uri.parse('https://bin-bank-pbp.up.railway.app/feedback-json');
+  var url = Uri.parse('http://127.0.0.1:8000/feedback-json');
   var response = await http.get(
     url,
   );

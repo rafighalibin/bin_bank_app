@@ -40,7 +40,7 @@ class MyApp extends StatelessWidget {
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key, required String title});
-  final String title = 'Program Counter';
+  final String title = 'Bin Bank';
 
   @override
   State<MyHomePage> createState() => _MyHomePageState();
