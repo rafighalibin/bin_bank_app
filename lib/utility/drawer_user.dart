@@ -1,10 +1,13 @@
 import 'package:bin_bank_app/page/deposit_sampah.dart';
 import 'package:bin_bank_app/page/leaderboard.dart';
+import 'package:bin_bank_app/page/history.dart';
 import 'package:flutter/material.dart';
 import 'package:bin_bank_app/main.dart';
+import 'package:pbp_django_auth/pbp_django_auth.dart';
+import 'package:provider/provider.dart';
 
-class MyDrawer extends StatelessWidget {
-  const MyDrawer({Key? key}) : super(key: key);
+class MyDrawerUser extends StatelessWidget {
+  const MyDrawerUser({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) => Drawer(
@@ -25,8 +28,10 @@ class MyDrawer extends StatelessWidget {
           ListTile(
             title: const Text('HomePage'),
             onTap: () {
-              Navigator.of(context).pushReplacement(
-                  MaterialPageRoute(builder: (context) => const MyHomePage()));
+              Navigator.of(context).pushReplacement(MaterialPageRoute(
+                  builder: (context) => const MyHomePage(
+                        title: '',
+                      )));
             },
           ),
           ListTile(
@@ -42,7 +47,22 @@ class MyDrawer extends StatelessWidget {
               Navigator.of(context).pushReplacement(MaterialPageRoute(
                   builder: (context) => const MyDepositPage()));
             },
-          )
+          ),
+          ListTile(
+            title: const Text('History'),
+            onTap: () {
+              Navigator.of(context).pushReplacement(
+                  MaterialPageRoute(builder: (context) => const HistoryPage()));
+            },
+          ),
+          ListTile(
+            title: const Text('Logout'),
+            // onTap: () {
+            //   logout(request);
+            //   Navigator.of(context).pushReplacement(MaterialPageRoute(
+            //       builder: (context) => const MyHomePage()));
+            // },
+          ),
         ],
       ));
 }

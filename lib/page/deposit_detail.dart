@@ -1,4 +1,4 @@
-import 'package:bin_bank_app/utility/drawer.dart';
+import 'package:bin_bank_app/utility/drawer_user.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -16,7 +16,7 @@ class _DepositDetailsState extends State<DepositDetails> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(title: const Text("Detail")),
-        drawer: const MyDrawer(),
+        drawer: const MyDrawerUser(),
         body: Padding(
             padding: const EdgeInsets.all(15),
             child: Column(
