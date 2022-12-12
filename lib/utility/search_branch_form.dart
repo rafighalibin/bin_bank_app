@@ -28,7 +28,7 @@ class _SearchBranchFormState extends State<SearchBranchForm> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Suggestion Box'),
+        title: Text('Cari Transaksi'),
       ),
       drawer: const MyDrawerUser(),
       body: Center(

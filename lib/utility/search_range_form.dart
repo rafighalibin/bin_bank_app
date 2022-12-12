@@ -29,7 +29,7 @@ class _SearchRangeFormState extends State<SearchRangeForm> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Suggestion Box'),
+        title: Text('Cari Transaksi'),
       ),
       drawer: const MyDrawerUser(),
       body: Center(
