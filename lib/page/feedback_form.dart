@@ -7,6 +7,8 @@ import 'package:bin_bank_app/main.dart';
 import 'package:provider/provider.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:bin_bank_app/page/login_page.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 class MyFormPage extends StatefulWidget {
   const MyFormPage({super.key});
@@ -21,20 +23,23 @@ class _MyFormPageState extends State<MyFormPage> {
   String feedback = "";
 
   void _initFeedback(request) async {
-    var data = convert.jsonEncode(
-      <String, dynamic>{
-        "user": request.jsonData['username'],
-        "subject": subject,
-        "feedback": feedback,
-      },
-    );
-
     //final response = await http.post("http://127.0.0.1:8000/post-feedback-json/",
     //headers: {"Content-Type": "application/json"}, body: data);
 
-    final response = await request.postJson(
-        "http://127.0.0.1:8000/post-feedback-json/", data);
-    if (response['message'] == 'SUCCESS') {
+    var url =
+        Uri.parse('https://bin-bank-pbp.up.railway.app/post-feedback-json/');
+    Map<String, String> requestBody = <String, String>{
+      "user": request.jsonData['username'],
+      "subject": subject,
+      "feedback": feedback,
+    };
+    var request1 = http.MultipartRequest('POST', url)
+      ..fields.addAll(requestBody);
+    var response = await request1.send();
+    final respStr = await response.stream.bytesToString();
+    var encoded = json.decode(respStr);
+
+    if (encoded['message'] == 'SUCCESS') {
       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
         content: Text("Feedback berhasil tersimpan"),
       ));
