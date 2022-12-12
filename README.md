@@ -1,5 +1,7 @@
 # Tugas Kelompok Pemrograman Berbasis Platform UAS Kelompok D09 TA 2022-2023
 [![Build status](https://build.appcenter.ms/v0.1/apps/44c122d5-7b9c-4d5b-a827-ad3d61d01718/branches/main/badge)](https://appcenter.ms)
+[![Release](https://github.com/rafighalibin/bin_bank_app/actions/workflows/release.yml/badge.svg)](https://github.com/rafighalibin/bin_bank_app/actions/workflows/release.yml)
+
 ## 👩🏻‍💻 Nama Anggota Kelompok 👨🏻‍💻
 
 - Kausar Meutuwah - 2106630100
