@@ -1,7 +1,6 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:bin_bank_app/utility/drawer_user.dart';
 import 'package:bin_bank_app/page/history.dart';
 import '../model/globals.dart' as global;
@@ -29,7 +28,7 @@ class _SearchRangeFormState extends State<SearchRangeForm> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Suggestion Box'),
+        title: Text('Cari Transaksi'),
       ),
       drawer: const MyDrawerUser(),
       body: Center(
@@ -124,6 +123,7 @@ class _SearchRangeFormState extends State<SearchRangeForm> {
                     child: TextButton(
                       onPressed: () {
                         if (_formKey.currentState!.validate()) {
+                          global.counter++;
                           global.list = fetchTransactionsRange(
                               global.username, _min.text, _max.text);
                           ScaffoldMessenger.of(context).showSnackBar(

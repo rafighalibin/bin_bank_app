@@ -1,8 +1,6 @@
 import 'package:bin_bank_app/model/transactions.dart';
-import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-import 'package:bin_bank_app/model/transactions.dart';
 
 Future<List<Transactions>> fetchTransactions() async {
   var url = Uri.parse('https://bin-bank-pbp.up.railway.app/json/');

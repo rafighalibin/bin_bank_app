@@ -1,6 +1,5 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
-import 'package:bin_bank_app/main.dart';
 import 'package:flutter/material.dart';
 import 'package:bin_bank_app/utility/drawer_user.dart';
 import 'package:bin_bank_app/utility/search_branch_form.dart';
@@ -20,7 +19,6 @@ class HistoryPage extends StatefulWidget {
   State<HistoryPage> createState() => _HistoryPageState();
 }
 
-// TODO: ini masih gabisa pas awal
 Future<List<Transactions>> list = fetchTransactions1(global.username);
 
 class _HistoryPageState extends State<HistoryPage> {
@@ -31,12 +29,6 @@ class _HistoryPageState extends State<HistoryPage> {
   Widget build(BuildContext context) {
     final request = context.watch<CookieRequest>();
     global.username = request.jsonData['username'];
-
-    print(list);
-    print(list == null);
-    if (list == null) {
-      list = fetchTransactions1(request.jsonData['username']);
-    }
     return Scaffold(
         appBar: AppBar(
           title: Row(
@@ -55,6 +47,9 @@ class _HistoryPageState extends State<HistoryPage> {
                   style: TextStyle(fontWeight: FontWeight.bold)),
               TextButton(
                 onPressed: () {
+                  global.counter++;
+                  global.list =
+                      fetchTransactionsOngoing(request.jsonData['username']);
                   setState(() {
                     list =
                         fetchTransactionsOngoing(request.jsonData['username']);
@@ -88,6 +83,9 @@ class _HistoryPageState extends State<HistoryPage> {
               ),
               TextButton(
                 onPressed: () {
+                  global.counter++;
+                  global.list =
+                      fetchTransactionsSucces(request.jsonData['username']);
                   setState(() {
                     list =
                         fetchTransactionsSucces(request.jsonData['username']);
@@ -121,6 +119,9 @@ class _HistoryPageState extends State<HistoryPage> {
               ),
               TextButton(
                 onPressed: () {
+                  global.counter++;
+                  global.list =
+                      fetchTransactions1(request.jsonData['username']);
                   setState(() {
                     list = fetchTransactions1(request.jsonData['username']);
                     lastcall = "fetchTransactions";
@@ -213,7 +214,7 @@ class _HistoryPageState extends State<HistoryPage> {
           ),
         ),
         body: FutureBuilder(
-            future: list,
+            future: getList(),
             builder: (context, AsyncSnapshot snapshot) {
               if (snapshot.data == null) {
                 return const Center(child: CircularProgressIndicator());
@@ -323,5 +324,12 @@ class _HistoryPageState extends State<HistoryPage> {
                 }
               }
             }));
+  }
+
+  Future<List<Transactions>> getList() {
+    if (global.counter == 0) {
+      return fetchTransactions1(global.username);
+    }
+    return list;
   }
 }
