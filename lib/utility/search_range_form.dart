@@ -40,6 +40,7 @@ class _SearchRangeFormState extends State<SearchRangeForm> {
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: TextFormField(
+                  keyboardType: TextInputType.number,
                   controller: _min,
                   decoration: const InputDecoration(
                     border: OutlineInputBorder(),
@@ -63,6 +64,7 @@ class _SearchRangeFormState extends State<SearchRangeForm> {
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: TextFormField(
+                  keyboardType: TextInputType.number,
                   controller: _max,
                   decoration: const InputDecoration(
                     border: OutlineInputBorder(),
