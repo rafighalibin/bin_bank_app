@@ -7,6 +7,7 @@ import 'package:provider/provider.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 
 import '../utility/update_transaction.dart';
+import 'deposit_sampah.dart';
 
 class DepositFormPage extends StatefulWidget {
   const DepositFormPage({super.key});
@@ -129,6 +130,8 @@ class _DepositFormPageState extends State<DepositFormPage> {
                     onPressed: () async {
                       addTransaction(
                           request.jsonData['username'], _amountKg, _branchName);
+                          Navigator.of(context).pushReplacement(MaterialPageRoute(
+                              builder: (context) => const MyDepositPage()));
                     }),
               ],
             ),

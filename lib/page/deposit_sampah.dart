@@ -91,7 +91,7 @@ class _MyDepositPageState extends State<MyDepositPage> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: const [
                     Text(
-                      "Oops, nggak ada transaksi yang sesuai filter",
+                      "Oops, Belum ada Transaksi",
                       style: TextStyle(
                           color: Color.fromARGB(255, 6, 72, 254),
                           fontSize: 20,
@@ -118,28 +118,15 @@ class _MyDepositPageState extends State<MyDepositPage> {
                         ListTile(
                             subtitle: Column(
                               children: [
-                                if (snapshot.data![index].fields.isFinished !=
-                                    true) ...[
                                   Text(
                                       '${snapshot.data![index].fields.amountKg}Kg (${DateFormat('yyyy-MM-dd kk:mm').format(snapshot.data![index].fields.date)})',
                                       style: TextStyle(
                                           fontWeight: FontWeight.bold)),
                                   Text(
                                       'Cabang: ${snapshot.data![index].fields.branchName}'),
-                                  Text('Sedang Berlangsung',
+                                  Text(snapshot.data![index].fields.isFinished ? 'Berhasil':'Sedang Berlangsung',
                                       style: TextStyle(
                                           fontWeight: FontWeight.bold)),
-                                ] else ...[
-                                  Text(
-                                      '${snapshot.data![index].fields.amountKg}Kg (${DateFormat('yyyy-MM-dd kk:mm').format(snapshot.data![index].fields.date)})',
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.bold)),
-                                  Text(
-                                      'Cabang: ${snapshot.data![index].fields.branchName}'),
-                                  Text('Berhasil',
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.bold)),
-                                ],
                               ],
                             ),
                             onTap: () {
