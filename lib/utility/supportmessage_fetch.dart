@@ -3,7 +3,8 @@ import 'package:bin_bank_app/model/supportmessage.dart';
 import 'dart:convert';
 
 Future<List<Datum>> fetchSupportmessage() async {
-  var url = Uri.parse('http://127.0.0.1:8000/json/support-message');
+  var url =
+      Uri.parse('https://bin-bank-pbp.up.railway.app/json/support-message');
   var response = await http.get(
     url,
     headers: {

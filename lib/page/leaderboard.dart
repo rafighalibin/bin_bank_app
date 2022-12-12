@@ -1,23 +1,13 @@
 import 'package:bin_bank_app/main.dart';
-import 'package:bin_bank_app/utility/drawer.dart';
+import 'package:bin_bank_app/utility/drawer_user.dart';
+import 'package:bin_bank_app/utility/drawer_public.dart';
 import 'package:bin_bank_app/utility/leadearboard_fetch.dart';
 import 'package:bin_bank_app/utility/supportmessage_add.dart';
 import 'package:bin_bank_app/utility/supportmessage_fetch.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-
-bool isInLeaderboard = false;
-int positionInLeaderboard = 0;
-String username = "ryu";
-
-Color colorHelper(usernameArgument, position) {
-  if (usernameArgument == username) {
-    isInLeaderboard = true;
-    positionInLeaderboard = position + 1;
-    return Colors.yellow;
-  }
-  return Colors.white;
-}
+import 'package:pbp_django_auth/pbp_django_auth.dart';
+import 'package:provider/provider.dart';
 
 String convertDate(date) {
   String formattedDate = DateFormat('MM/dd/yyyy').format(date);
@@ -34,9 +24,52 @@ class LeaderboardPage extends StatefulWidget {
 class _MyFormPageState extends State<LeaderboardPage> {
   final _formKey = GlobalKey<FormState>();
   String judul = "";
+  bool isInLeaderboard = false;
+  bool isAuthenticated = false;
+  int positionInLeaderboard = 0;
+
+  String? getUsername() {
+    final request = context.watch<CookieRequest>();
+    username = request.jsonData['username'];
+    if (username == null) {
+      print(isAuthenticated);
+      return null;
+    } else {
+      if (isAuthenticated == false) {
+        isAuthenticated = true;
+      }
+      print("AuthCheck: $isAuthenticated");
+      return username;
+    }
+  }
+
+  late String? username = getUsername();
+
+  Color colorHelper(usernameArgument, position) {
+    if (usernameArgument == username) {
+      isInLeaderboard = true;
+      positionInLeaderboard = position + 1;
+      return Colors.yellow;
+    }
+    return Colors.white;
+  }
+
+  Widget getWidget() {
+    final request = context.watch<CookieRequest>();
+    if (request.jsonData['username'] == null) {
+      return const MyDrawerPublic();
+    } else {
+      return const MyDrawerUser();
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
+    if (username != null) {
+      setState(() {
+        isAuthenticated = true;
+      });
+    }
     return Scaffold(
         appBar: AppBar(
           title: const Text('Leaderboard'),
@@ -141,11 +174,19 @@ class _MyFormPageState extends State<LeaderboardPage> {
                     textAlign: TextAlign.center,
                     style: const TextStyle(fontSize: 15)),
               ),
-            if (!isInLeaderboard)
+            if (!isInLeaderboard && isAuthenticated)
               Container(
                 alignment: Alignment.center,
                 child: const Text(
                     'Wah, poin kamu belum cukup untuk masuk leaderboard. Tingkatkan poinmu dengan melakukan donasi sampah!',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(fontSize: 15)),
+              ),
+            if (!isAuthenticated)
+              Container(
+                alignment: Alignment.center,
+                child: const Text(
+                    'Kamu belum login. Silakan login untuk melihat peringkatmu di leaderboard.',
                     textAlign: TextAlign.center,
                     style: TextStyle(fontSize: 15)),
               ),
@@ -223,75 +264,88 @@ class _MyFormPageState extends State<LeaderboardPage> {
                   }
                 }),
             const SizedBox(height: 30),
-            Container(
-              alignment: Alignment.center,
-              child: const Text('Kirim pesan dukunganmu sekarang!',
+            if (isAuthenticated)
+              Container(
+                alignment: Alignment.center,
+                child: const Text('Kirim pesan dukunganmu sekarang!',
+                    textAlign: TextAlign.center,
+                    style:
+                        TextStyle(fontSize: 40, fontWeight: FontWeight.bold)),
+              ),
+            if (isAuthenticated) const SizedBox(height: 5),
+            if (isAuthenticated)
+              const Text(
+                  'Pesan dapat berupa semangat, saran, atau tips-tips seputar pengelolaan sampah',
                   textAlign: TextAlign.center,
-                  style: TextStyle(fontSize: 40, fontWeight: FontWeight.bold)),
-            ),
-            const SizedBox(height: 5),
-            const Text(
-                'Pesan dapat berupa semangat, saran, atau tips-tips seputar pengelolaan sampah',
-                textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 15)),
-            Form(
-              key: _formKey,
-              child: SingleChildScrollView(
-                child: Container(
-                  padding: const EdgeInsets.all(20.0),
-                  child: Column(
-                    children: [
-                      TextFormField(
-                        decoration: InputDecoration(
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(5.0),
+                  style: TextStyle(fontSize: 15)),
+            if (isAuthenticated)
+              Form(
+                key: _formKey,
+                child: SingleChildScrollView(
+                  child: Container(
+                    padding: const EdgeInsets.all(20.0),
+                    child: Column(
+                      children: [
+                        TextFormField(
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(5.0),
+                            ),
+                          ),
+                          keyboardType: TextInputType.multiline,
+                          maxLines: 4,
+                          // Menambahkan behavior saat nama diketik
+                          onChanged: (String? value) {
+                            judul = value!;
+                          },
+                          // Menambahkan behavior saat data disimpan
+                          onSaved: (String? value) {
+                            setState(() {
+                              judul = value!;
+                            });
+                          },
+                          // Validator sebagai validasi form
+                          validator: (String? value) {
+                            if (value == null || value.isEmpty) {
+                              return 'Pesan dukungan tidak boleh kosong.';
+                            }
+                            return null;
+                          },
+                        ),
+                        const SizedBox(height: 40),
+                        TextButton(
+                          style: TextButton.styleFrom(
+                            backgroundColor: Colors.blue,
+                            padding: const EdgeInsets.all(16.0),
+                            textStyle: const TextStyle(fontSize: 20),
+                          ),
+                          onPressed: () {
+                            if (_formKey.currentState!.validate()) {
+                              sendSupportMessage(username!, judul);
+                            }
+                          },
+                          child: const Text(
+                            "   Kirim   ",
+                            style: TextStyle(color: Colors.white),
                           ),
                         ),
-                        keyboardType: TextInputType.multiline,
-                        maxLines: 4,
-                        // Menambahkan behavior saat nama diketik
-                        onChanged: (String? value) {
-                          judul = value!;
-                        },
-                        // Menambahkan behavior saat data disimpan
-                        onSaved: (String? value) {
-                          setState(() {
-                            judul = value!;
-                          });
-                        },
-                        // Validator sebagai validasi form
-                        validator: (String? value) {
-                          if (value == null || value.isEmpty) {
-                            return 'Pesan dukungan tidak boleh kosong.';
-                          }
-                          return null;
-                        },
-                      ),
-                      const SizedBox(height: 40),
-                      TextButton(
-                        style: TextButton.styleFrom(
-                          backgroundColor: Colors.blue,
-                          padding: const EdgeInsets.all(16.0),
-                          textStyle: const TextStyle(fontSize: 20),
-                        ),
-                        onPressed: () {
-                          if (_formKey.currentState!.validate()) {
-                            sendSupportMessage(username, judul);
-                          }
-                        },
-                        child: const Text(
-                          "   Kirim   ",
-                          style: TextStyle(color: Colors.white),
-                        ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
               ),
-            ),
+            if (!isAuthenticated)
+              Container(
+                alignment: Alignment.center,
+                child: const Text(
+                    'Silakan login terlebih dahulu untuk mengirim pesan dukungan',
+                    textAlign: TextAlign.center,
+                    style:
+                        TextStyle(fontSize: 35, fontWeight: FontWeight.bold)),
+              ),
             const SizedBox(height: 30)
           ]),
         ),
-        drawer: const MyDrawer());
+        drawer: getWidget());
   }
 }

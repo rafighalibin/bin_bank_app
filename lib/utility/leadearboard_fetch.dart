@@ -5,7 +5,7 @@ import 'dart:convert';
 
 Future<List<Fields>> fetchLeaderboard() async {
   print("stage 1");
-  var url = Uri.parse('http://127.0.0.1:8000/json/leaderboard');
+  var url = Uri.parse('https://bin-bank-pbp.up.railway.app/json/leaderboard');
   print("stage 2");
   var response = await http.get(
     url,
