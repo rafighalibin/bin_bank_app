@@ -1,10 +1,5 @@
-import 'dart:ffi';
-
-import 'package:bin_bank_app/model/transactions.dart';
-import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-import 'package:bin_bank_app/model/transactions.dart';
 
 void updateTransaction(String user, int pk) async {
   var url =
