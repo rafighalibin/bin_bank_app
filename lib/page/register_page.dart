@@ -1,12 +1,15 @@
-import 'package:bin_bank_app/app_styles.dart';
+// ignore_for_file: constant_identifier_names, use_build_context_synchronously
+import 'package:bin_bank_app/page/homepage.dart';
+import 'dart:convert';
+import 'package:bin_bank_app/main.dart';
 import 'package:flutter/material.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:provider/provider.dart';
 import 'package:bin_bank_app/page/login_page.dart';
-import '../utility/drawer_public.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({Key? key}) : super(key: key);
+  static const ROUTE_NAME = '/register';
 
   @override
   State<RegisterPage> createState() => _RegisterPageState();
@@ -18,18 +21,12 @@ class _RegisterPageState extends State<RegisterPage> {
   String password1 = "";
   String password2 = "";
   String? message;
-  bool obscurePass1 = true;
-  bool obscurePass2 = true;
 
   @override
   Widget build(BuildContext context) {
     final request = context.watch<CookieRequest>();
     Size size = MediaQuery.of(context).size;
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Register Page'),
-      ),
-      drawer: const MyDrawerPublic(),
       body: Center(
         child: SingleChildScrollView(
           child: Container(
@@ -37,33 +34,31 @@ class _RegisterPageState extends State<RegisterPage> {
             padding: const EdgeInsets.all(20.0),
             child: Column(
               children: [
-                const SizedBox(
+                SizedBox(
                   height: 20,
                 ),
                 Text(
-                  "Registrasi Akun",
-                  style: kPoppinsBoldBig,
+                  "Sign Up to JoyfulTimes",
+                  style: TextStyle(
+                      fontWeight: FontWeight.w500,
+                      fontSize: 20,
+                      color: Color.fromARGB(178, 3, 3, 3)),
                 ),
                 Form(
                   key: _formKey,
                   child: Column(children: [
-                    const SizedBox(
+                    SizedBox(
                       height: 20,
                     ),
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: TextFormField(
-                        
                         decoration: InputDecoration(
-                          prefixIcon: const Icon(
-                            Icons.account_circle,
-                          ),
                           labelText: "Username ",
-                            contentPadding: EdgeInsets.symmetric(
-                              vertical : 15,
-                              horizontal: size.width * 0.30),border: OutlineInputBorder(
+                          contentPadding: EdgeInsets.symmetric(
+                              vertical: 12, horizontal: 12),
+                          border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(16.0),
-                            borderSide: const BorderSide(color: Colors.white),
                           ),
                         ),
                         // Menambahkan behavior saat nama diketik
@@ -90,28 +85,17 @@ class _RegisterPageState extends State<RegisterPage> {
                     Padding(
                       // Menggunakan padding sebesar 8 pixels
                       padding: const EdgeInsets.all(8.0),
+
                       child: TextFormField(
-                        obscureText : obscurePass1,
+                        obscureText: true,
                         decoration: InputDecoration(
-                            labelText: "Password",
-                            contentPadding: const EdgeInsets.symmetric(
+                          labelText: "Password ",
+                          contentPadding: EdgeInsets.symmetric(
                               vertical: 12, horizontal: 12),
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(16.0),
-                              borderSide: const BorderSide(color: Colors.white),
-                            ),
-                            prefixIcon: const Icon(
-                              Icons.lock,
-                            ),
-                            suffixIcon: GestureDetector(
-                                onTap: () {
-                                  setState(() {
-                                    obscurePass1 = !obscurePass1;
-                                  });
-                                },
-                                child: obscurePass1
-                                    ? const Icon(Icons.visibility_off)
-                                    : const Icon(Icons.visibility))),
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(16.0),
+                          ),
+                        ),
                         // Menambahkan behavior saat nama diketik
                         onChanged: (String? value) {
                           setState(() {
@@ -127,7 +111,7 @@ class _RegisterPageState extends State<RegisterPage> {
                         // Validator sebagai validasi form
                         validator: (String? value) {
                           if (value == null || value.isEmpty) {
-                            return 'Password tidak boleh kosong!';
+                            return "Password tidak boleh kosong!";
                           }
                           return null;
                         },
@@ -136,29 +120,16 @@ class _RegisterPageState extends State<RegisterPage> {
                     Padding(
                       // Menggunakan padding sebesar 8 pixels
                       padding: const EdgeInsets.all(8.0),
+
                       child: TextFormField(
-                        obscureText : obscurePass2,
+                        obscureText: true,
                         decoration: InputDecoration(
                           labelText: "Password Confirmation",
-                          contentPadding: const EdgeInsets.symmetric(
+                          contentPadding: EdgeInsets.symmetric(
                               vertical: 12, horizontal: 12),
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(16.0),
-                            borderSide: const BorderSide(color: Colors.white),
                           ),
-                          prefixIcon: const Icon(
-                            Icons.lock,
-                          ),
-                          suffixIcon: GestureDetector(
-                            onTap: () {
-                              setState(() {
-                                obscurePass2 = !obscurePass2;
-                              });
-                            },
-                            child: obscurePass2 
-                                  ? const Icon(Icons.visibility_off)
-                                  : const Icon(Icons.visibility)
-                            )
                         ),
                         // Menambahkan behavior saat nama diketik
                         onChanged: (String? value) {
@@ -175,32 +146,29 @@ class _RegisterPageState extends State<RegisterPage> {
                         // Validator sebagai validasi form
                         validator: (String? value) {
                           if (value == null || value.isEmpty) {
-                            return 'Konfirmasi Password tidak boleh kosong!';
+                            return "Konfirmasi assword tidak boleh kosong!";
                           }
                           return null;
                         },
                       ),
                     ),
-                    
                     TextButton(
+                      child: const Text(
+                        "Simpan",
+                        style: TextStyle(color: Colors.white),
+                      ),
                       style: ButtonStyle(
                         backgroundColor: MaterialStateProperty.all(Colors.blue),
                       ),
                       onPressed: () async {
                         final response = await request.post(
-                          'https://bin-bank-pbp.up.railway.app/register/ajax',
-                          {
-                            "username": username,
-                            "password1": password1,
-                            "password2": password2,
-                          });
+                            'https://bin-bank-pbp.up.railway.app/register/ajax',
+                            {
+                              "username": username,
+                              "password1": password1,
+                              "password2": password2,
+                            });
                         if (response['status'] == true) {
-                          // ignore: use_build_context_synchronously
-                          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                            content: Text("Berhasil Register! Silakan Login"),
-                            backgroundColor: kBlue,
-                          ));
-                          // ignore: use_build_context_synchronously
                           Navigator.pushReplacement(
                               context,
                               MaterialPageRoute(
@@ -211,51 +179,35 @@ class _RegisterPageState extends State<RegisterPage> {
                           setState(() {
                             message = response['message'];
                           });
-                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                            content: Text(message ?? ""),
-                            backgroundColor: kLightBlue,
-                          ));
                         }
                       },
-                      child: const Text(
-                        "Sign Up",
-                        style: TextStyle(color: Colors.white),
-                      ),
                     ),
                     Center(
                         child: Text(
                       message ?? "",
                       style: const TextStyle(color: Colors.blue, fontSize: 16),
                     )),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        Text(
-                          'Sudah mempunyai akun?',
-                          style: kPoppinsMedium,
-                        ),
-                        TextButton(
-                          child: Text(
-                            'Sign In',
-                            style: kPoppinsSemiboldLightBlue,
-                          ),
-                          onPressed: () {
-                            Navigator.pushReplacement(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => const LoginPage()),
-                              );
-                            },
-                          )
-                        ],
+                    Text("Sudah mempunyai akun?"),
+                    TextButton(
+                      onPressed: () {
+                        Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const LoginPage()),
+                        );
+                      },
+                      child: const Text(
+                        'Login',
+                        style: TextStyle(color: Colors.indigo),
                       ),
+                    ),
                   ]),
                 )
               ],
             ),
           ),
         ),
-      )
+      ),
     );
   }
 }

@@ -136,7 +136,6 @@ class _LoginPageState extends State<LoginPage> {
                               },
                             ),
                           ),
-                          
                           TextButton(
                             style: ButtonStyle(
                               backgroundColor:
@@ -172,7 +171,7 @@ class _LoginPageState extends State<LoginPage> {
                             },
                             child: Text(
                               "Sign In",
-                              style : kPoppinsSemibold,
+                              style: kPoppinsSemibold,
                             ),
                           ),
                           Row(
