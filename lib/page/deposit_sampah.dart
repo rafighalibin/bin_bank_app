@@ -1,34 +1,97 @@
-import 'package:bin_bank_app/utility/drawer_user.dart';
-import 'package:flutter/material.dart';
-import 'package:bin_bank_app/utility/transactions_fetch.dart';
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
+
 import 'package:bin_bank_app/page/deposit_detail.dart';
+import 'package:bin_bank_app/page/deposit_form.dart';
+import 'package:flutter/material.dart';
+import 'package:bin_bank_app/utility/drawer_user.dart';
+
+import 'package:bin_bank_app/utility/transactions_fetch.dart';
+import 'package:bin_bank_app/utility/update_transaction.dart';
+import 'package:intl/intl.dart';
+import '../model/transactions.dart';
+import 'package:pbp_django_auth/pbp_django_auth.dart';
+import 'package:provider/provider.dart';
+import '../model/globals.dart' as global;
+
+const List<String> branchOptions = <String>['One', 'Two', 'Three', 'Four'];
 
 class MyDepositPage extends StatefulWidget {
-  const MyDepositPage({super.key});
+  const MyDepositPage({Key? key}) : super(key: key);
 
   @override
   State<MyDepositPage> createState() => _MyDepositPageState();
 }
 
 class _MyDepositPageState extends State<MyDepositPage> {
+  final _formKey = GlobalKey<FormState>();
+  int _amountKg = 0;
+  String _branchName = "";
+  String dropdownValue = "branch_1";
+
+  Future<List<Transactions>> list = fetchTransactions1(global.username);
+  String lastcall = "fetchTransactions";
+
   @override
   Widget build(BuildContext context) {
+    final request = context.watch<CookieRequest>();
+    global.username = request.jsonData['username'];
     return Scaffold(
-        appBar: AppBar(title: const Text("Deposit Sampah")),
-        drawer: const MyDrawerUser(),
-        body: FutureBuilder(
-            future: fetchTransactions(),
+      appBar: AppBar(
+        title: Row(
+          children: [
+            const Text('Donate'),
+          ],
+        ),
+      ),
+      drawer: const MyDrawerUser(),
+      floatingActionButton: TextButton(
+        onPressed: () {
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+                builder: (context) => const DepositFormPage()),
+          );
+        },
+        child: Container(
+            alignment: Alignment.center,
+            height: 50,
+            width: 240,
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topLeft,
+                end: Alignment(0.8, 1),
+                colors: <Color>[
+                  Color.fromARGB(255, 6, 72, 254),
+                  Color.fromARGB(255, 0, 195, 255),
+                ],
+                tileMode: TileMode.mirror,
+              ),
+              borderRadius: BorderRadius.all(Radius.circular(40)),
+            ),
+            child: Text(
+              'Add Transactions',
+              style: TextStyle(color: Colors.white,fontSize: 20),
+            )),
+      ),
+      body: Container(
+        alignment: Alignment.centerRight,
+        margin: const EdgeInsets.fromLTRB(15, 0, 15, 5),
+        child: FutureBuilder(
+            future: fetchTransactions1(global.username),
             builder: (context, AsyncSnapshot snapshot) {
               if (snapshot.data == null) {
                 return const Center(child: CircularProgressIndicator());
               } else {
-                if (!snapshot.hasData) {
+                if (snapshot.data.length == 0) {
                   return Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: const [
                       Text(
-                        "Tidak ada item di MyWatchList :(",
-                        style:
-                        TextStyle(color: Color(0xff59A5D8), fontSize: 20),
+                        "Oops, Belum ada Transaksi",
+                        style: TextStyle(
+                            color: Color.fromARGB(255, 6, 72, 254),
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold),
                       ),
                       SizedBox(height: 8),
                     ],
@@ -41,15 +104,9 @@ class _MyDepositPageState extends State<MyDepositPage> {
                           horizontal: 16, vertical: 12),
                       padding: const EdgeInsets.all(20.0),
                       decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(15.0),
-                          boxShadow: [
-                            BoxShadow(
-                                color: snapshot.data![index].fields.isFinished
-                                    ? Colors.green
-                                    : Colors.red,
-                                blurRadius: 2.0)
-                          ]),
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(15.0),
+                      ),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -57,42 +114,27 @@ class _MyDepositPageState extends State<MyDepositPage> {
                           ListTile(
                               subtitle: Column(
                                 children: [
-                                  Text('Amount : ${snapshot.data![index].fields.amountKg}'),
-                                  Text('Date: ${snapshot.data![index].fields.date}'),
-                                  Text('Branch: ${snapshot.data![index].fields.branchName}'),
-                                  Text('Status: ${snapshot.data![index].fields.isFinished ? "Yes": " No"}'),
-                                ],
-                              ),
-                              trailing: Column(
-                                children: [
-                                  Checkbox(
-                                    checkColor: Colors.white,
-                                    fillColor:
-                                    MaterialStateProperty.resolveWith<
-                                        Color>((Set<MaterialState> states) {
-                                      if (snapshot.data![index].fields.isFinished) {
-                                        return Colors.green;
-                                      }
-                                      return Colors.red;
-                                    }),
-                                    value: snapshot.data![index].fields.isFinished,
-                                    onChanged: (bool? value) {
-                                      setState(() {
-                                        snapshot.data![index].fields.isFinished =
-                                        value!;
-                                      });
-                                    },
-                                  ),
+                                  Text(
+                                      '${snapshot.data![index].fields.amountKg}Kg (${DateFormat('yyyy-MM-dd kk:mm').format(snapshot.data![index].fields.date)})',
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold)),
+                                  Text(
+                                      'Cabang: ${snapshot.data![index].fields.branchName}'),
+                                  Text(
+                                      snapshot.data![index].fields.isFinished
+                                          ? 'Berhasil'
+                                          : 'Sedang Berlangsung',
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold)),
                                 ],
                               ),
                               onTap: () {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) =>
-                                          DepositDetails(
-                                              transactionItem:
-                                              snapshot.data![index])),
+                                      builder: (context) => DepositDetails(
+                                          transactionItem:
+                                          snapshot.data![index])),
                                 );
                               }),
                         ],
@@ -101,6 +143,114 @@ class _MyDepositPageState extends State<MyDepositPage> {
                   );
                 }
               }
-            }));
+            }),
+        // ListView(children: [
+        //   Container(
+        //     alignment: Alignment.center,
+        //     margin: const EdgeInsets.fromLTRB(5, 5, 5, 10),
+        //     child: const Text("DEPOSIT SAMPAH",
+        //         style: TextStyle(fontSize: 30)),
+        //   ),
+        //   TextButton(
+        //     onPressed: () {
+        //       Navigator.pushReplacement(
+        //         context,
+        //         MaterialPageRoute(
+        //             builder: (context) => const DepositFormPage()),
+        //       );
+        //     },
+        //     child: Container(
+        //         alignment: Alignment.center,
+        //         height: 24,
+        //         width: 164,
+        //         decoration: BoxDecoration(
+        //           gradient: LinearGradient(
+        //             begin: Alignment.topLeft,
+        //             end: Alignment(0.8, 1),
+        //             colors: <Color>[
+        //               Color.fromARGB(255, 6, 72, 254),
+        //               Color.fromARGB(255, 0, 195, 255),
+        //             ],
+        //             tileMode: TileMode.mirror,
+        //           ),
+        //           borderRadius: BorderRadius.all(Radius.circular(40)),
+        //         ),
+        //         child: Text(
+        //           'Add Transactions',
+        //           style: TextStyle(color: Colors.white),
+        //         )),
+        //   ),
+        //   Container(child:FutureBuilder(
+        //       future: fetchTransactions1(global.username),
+        //       builder: (context, AsyncSnapshot snapshot) {
+        //         if (snapshot.data == null) {
+        //           return const Center(child: CircularProgressIndicator());
+        //         } else {
+        //           if (snapshot.data.length == 0) {
+        //             return Column(
+        //               mainAxisAlignment: MainAxisAlignment.center,
+        //               children: const [
+        //                 Text(
+        //                   "Oops, Belum ada Transaksi",
+        //                   style: TextStyle(
+        //                       color: Color.fromARGB(255, 6, 72, 254),
+        //                       fontSize: 20,
+        //                       fontWeight: FontWeight.bold),
+        //                 ),
+        //                 SizedBox(height: 8),
+        //               ],
+        //             );
+        //           } else {
+        //             return ListView.builder(
+        //               itemCount: snapshot.data!.length,
+        //               itemBuilder: (_, index) => Container(
+        //                 margin: const EdgeInsets.symmetric(
+        //                     horizontal: 16, vertical: 12),
+        //                 padding: const EdgeInsets.all(20.0),
+        //                 decoration: BoxDecoration(
+        //                   color: Colors.white,
+        //                   borderRadius: BorderRadius.circular(15.0),
+        //                 ),
+        //                 child: Column(
+        //                   mainAxisAlignment: MainAxisAlignment.start,
+        //                   crossAxisAlignment: CrossAxisAlignment.start,
+        //                   children: [
+        //                     ListTile(
+        //                         subtitle: Column(
+        //                           children: [
+        //                             Text(
+        //                                 '${snapshot.data![index].fields.amountKg}Kg (${DateFormat('yyyy-MM-dd kk:mm').format(snapshot.data![index].fields.date)})',
+        //                                 style: TextStyle(
+        //                                     fontWeight: FontWeight.bold)),
+        //                             Text(
+        //                                 'Cabang: ${snapshot.data![index].fields.branchName}'),
+        //                             Text(
+        //                                 snapshot.data![index].fields.isFinished
+        //                                     ? 'Berhasil'
+        //                                     : 'Sedang Berlangsung',
+        //                                 style: TextStyle(
+        //                                     fontWeight: FontWeight.bold)),
+        //                           ],
+        //                         ),
+        //                         onTap: () {
+        //                           Navigator.push(
+        //                             context,
+        //                             MaterialPageRoute(
+        //                                 builder: (context) => DepositDetails(
+        //                                     transactionItem:
+        //                                     snapshot.data![index])),
+        //                           );
+        //                         }),
+        //                   ],
+        //                 ),
+        //               ),
+        //             );
+        //           }
+        //         }
+        //       }), )
+        // ]),
+      ),
+    );
   }
+
 }
