@@ -26,7 +26,7 @@ class MyDrawerPublic extends StatelessWidget {
           children: [
             ListTile(
               leading: const Icon(Icons.home),
-              title: const Text('HomePage'),
+              title: const Text('Home'),
               onTap: () {
                 Navigator.of(context).pushReplacement(MaterialPageRoute(
                     builder: (context) => const Home(

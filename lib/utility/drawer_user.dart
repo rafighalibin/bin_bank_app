@@ -31,12 +31,13 @@ class MyDrawerUser extends StatelessWidget {
         child: Wrap(
           runSpacing: 12,
           children: [
+            const MyHeaderDrawer(),
             ListTile(
               leading: const Icon(Icons.home),
-              title: const Text('HomePage'),
+              title: const Text('Home'),
               onTap: () {
                 Navigator.of(context).pushReplacement(MaterialPageRoute(
-                    builder: (context) => const MyHomePage(
+                    builder: (context) => const Home(
                           title: 'Bin Bank',
                         )));
               },

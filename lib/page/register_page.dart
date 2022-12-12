@@ -38,7 +38,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   height: 20,
                 ),
                 Text(
-                  "Sign Up to JoyfulTimes",
+                  "Sign Up to Bin Bank",
                   style: TextStyle(
                       fontWeight: FontWeight.w500,
                       fontSize: 20,
