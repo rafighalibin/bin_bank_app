@@ -1,3 +1,4 @@
+import 'package:bin_bank_app/page/homepage.dart';
 import 'package:bin_bank_app/page/login_page.dart';
 import 'package:bin_bank_app/page/register_page.dart';
 import 'package:bin_bank_app/page/leaderboard.dart';
@@ -26,10 +27,10 @@ class MyDrawerPublic extends StatelessWidget {
           runSpacing: 12,
           children: [
             ListTile(
-              title: const Text('HomePage'),
+              title: const Text('Home'),
               onTap: () {
                 Navigator.of(context).pushReplacement(MaterialPageRoute(
-                    builder: (context) => const MyHomePage(
+                    builder: (context) => const Home(
                           title: 'Bin Bank',
                         )));
               },
