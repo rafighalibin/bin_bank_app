@@ -9,6 +9,7 @@ import 'package:provider/provider.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:bin_bank_app/page/login_page.dart';
 import 'package:http/http.dart' as http;
+import 'package:bin_bank_app/page/homepage.dart';
 
 class MyFormPage extends StatefulWidget {
   const MyFormPage({super.key});
@@ -44,7 +45,7 @@ class _MyFormPageState extends State<MyFormPage> {
         content: Text("Feedback berhasil tersimpan"),
       ));
       Navigator.of(context).pushReplacement(MaterialPageRoute(
-          builder: (context) => const MyHomePage(
+          builder: (context) => const Home(
                 title: 'Bin Bank',
               )));
     } else {

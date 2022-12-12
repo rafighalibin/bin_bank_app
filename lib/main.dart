@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:provider/provider.dart';
 import 'package:bin_bank_app/app_styles.dart';
-import 'package:bin_bank_app/page/homepage.dart';
 
 void main() {
   bool isLoggedIn = false;

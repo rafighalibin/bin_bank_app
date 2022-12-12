@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:bin_bank_app/main.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:provider/provider.dart';
+import 'package:bin_bank_app/page/homepage.dart';
 
 class MyDrawerUser extends StatelessWidget {
   const MyDrawerUser({Key? key}) : super(key: key);
@@ -29,7 +30,7 @@ class MyDrawerUser extends StatelessWidget {
             title: const Text('HomePage'),
             onTap: () {
               Navigator.of(context).pushReplacement(MaterialPageRoute(
-                  builder: (context) => const MyHomePage(
+                  builder: (context) => const Home(
                         title: 'Bin Bank',
                       )));
             },
