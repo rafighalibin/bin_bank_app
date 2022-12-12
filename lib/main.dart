@@ -4,6 +4,9 @@ import 'package:bin_bank_app/utility/drawer_user.dart';
 import 'package:flutter/material.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:provider/provider.dart';
+import 'package:bin_bank_app/app_styles.dart';
+import 'package:bin_bank_app/page/feedback_form.dart';
+import 'package:bin_bank_app/page/feedback_detail.dart';
 
 void main() {
   bool isLoggedIn = false;
@@ -44,20 +47,6 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
-
-  void _decrementCounter() {
-    setState(() {
-      if (_counter != 0) _counter--;
-    });
-  }
-
   Widget getWidget() {
     final request = context.watch<CookieRequest>();
 
@@ -70,64 +59,115 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    List<String> articleTitle = [
+      'E-waste management must get policy priority',
+      'How Can We Solve The Growing E-Waste Problem?',
+      'Jubir G20 Sebut Permasalahan Sampah Menumpuk di Indonesia',
+    ];
+
+    List<String> publisher = [
+      'NEW AGE',
+      'EPOLINE',
+      'KBR',
+    ];
+
+    List<String> images = [
+      'waste-1.jpg',
+      'waste-2.jpg',
+      'waste-3.jpg',
+    ];
+
     return Scaffold(
-      appBar: AppBar(
-        title: Text("BinBank: ${widget.title}"),
-      ),
-      drawer: getWidget(),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Expanded(
+        appBar: AppBar(
+          title: const Text("BinBank"),
+        ),
+        drawer: getWidget(),
+        body: Center(
+          child: SingleChildScrollView(
+            child: Container(
+              padding: const EdgeInsets.all(20.0),
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  _counter % 2 == 0
-                      ? const Text(
-                          'GENAP',
-                          style: TextStyle(color: Colors.red),
-                        )
-                      : const Text(
-                          'GANJIL',
-                          style: TextStyle(color: Colors.blue),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text('Welcome to Bin Bank',
+                        style: kPoppinsBold.copyWith(
+                          fontSize: 22,
+                          color: kDarkBlue,
+                        )),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(
+                        'Join us to promote and protect our health and environment.',
+                        style: kPoppinsRegular.copyWith(
+                          fontSize: 16,
+                        )),
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  Container(
+                    height: 35,
+                    padding: const EdgeInsets.all(8.0),
+                    child: Row(
+                      children: [
+                        Text(
+                          'Article',
+                          style: kPoppinsBold.copyWith(
+                            fontSize: 14,
+                          ),
                         ),
-                  Text(
-                    '$_counter',
-                    style: Theme.of(context).textTheme.headline4,
+                        const SizedBox(
+                          width: 10,
+                        ),
+                        Text(
+                          '📰',
+                          style: kPoppinsBold.copyWith(
+                            fontSize: 12,
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 30,
+                  ),
+                  TextButton(
+                    style: ButtonStyle(
+                      foregroundColor:
+                          MaterialStateProperty.all<Color>(Colors.blue),
+                    ),
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const MyFormPage()));
+                    },
+                    child: const Text('Give Feedback'),
+                  ),
+                  const SizedBox(
+                    height: 30,
+                  ),
+                  TextButton(
+                    style: ButtonStyle(
+                      foregroundColor:
+                          MaterialStateProperty.all<Color>(Colors.blue),
+                    ),
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  const FeedbackDetailPage()));
+                    },
+                    child: const Text('Show All Feedbacks'),
                   ),
                 ],
               ),
             ),
-          ],
-        ),
-      ),
-      bottomSheet: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Visibility(
-              visible: (_counter > 0),
-              child: FloatingActionButton(
-                onPressed: _decrementCounter,
-                tooltip: 'Decrement',
-                child: const Icon(Icons.remove),
-              ),
-            ),
           ),
-          Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: FloatingActionButton(
-              onPressed: _incrementCounter,
-              tooltip: 'Increment',
-              heroTag: null,
-              child: const Icon(Icons.add),
-            ),
-          ),
-        ], // This trailing comma makes auto-formatting nicer for build methods.],
-      ),
-    );
+        ));
     // This trailing comma makes auto-formatting nicer for build methods.
   }
 }

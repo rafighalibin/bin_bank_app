@@ -30,7 +30,7 @@ class MyDrawerUser extends StatelessWidget {
             onTap: () {
               Navigator.of(context).pushReplacement(MaterialPageRoute(
                   builder: (context) => const MyHomePage(
-                        title: '',
+                        title: 'Bin Bank',
                       )));
             },
           ),
