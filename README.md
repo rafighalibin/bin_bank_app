@@ -11,7 +11,7 @@
 - Amanda Christie Tarigan - 2106751322 
 
 ## 🌐 Tautan 🌐
-* Mobile App : https://install.appcenter.ms/orgs/bin_bank/apps/Bin-Bank-App
+* Mobile App : https://install.appcenter.ms/orgs/bin_bank/apps/bin-bank-app/distribution_groups/public
 * Website App : https://bin-bank-pbp.up.railway.app/
 
 ## 📜 Cerita Aplikasi 📜
