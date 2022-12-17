@@ -55,3 +55,28 @@ Masalah sampah di Indonesia masih menjadi polemik hingga menjadi salah satu isu 
 
 - Tidak perlu melakukan login
 - Hanya dapat mengakses home page
+
+## Widget yang digunakan pada setiap modul
+
+### Deposit Sampah
+- Scaffold
+- Appbar
+- FutureBuilder
+- Text
+- Text Button
+- Column
+- Row
+- Alignment
+- TextStyle
+- Center
+- BoxDecoration
+- Navigator
+- Container 
+
+## Asynchronous communcation ke web app
+1. Buat views dan urls pada web app untuk menangani GET request yang akan dikirim oleh Mobile App untuk mengambil data dari Web App.
+2. Buat views dan urls pada web app untuk menangani POST request yang akan dikirim oleh Mobile App untuk menambahkan data baru.
+3. Buat models pada mobile app untuk menyimpan data yang akan diterima.
+4. Buat fungsi asinkronus pada mobile app untuk menerima data dari web app menggunakan GET request.
+5. Buat fungsi asinkronus pada mobile app untuk mengirimkan data ke web app menggunakan POST request.
+4. Buat Future Builder untuk menampilkan data dari fungsi asinkronus ke Mobile App.
