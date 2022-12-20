@@ -57,17 +57,77 @@ Masalah sampah di Indonesia masih menjadi polemik hingga menjadi salah satu isu 
 - Hanya dapat mengakses home page
 
 ## Widget yang digunakan pada setiap modul
+### Home
+- Scaffold
+- AppBar
+- Container
+- SingleChildScrollView
+- Center
+- Card
+- Text 
+- TextButton
+- ListTile
+- Column
+- Row
+- SizedBox
+- Navigator
+
+### Authentication
+- Scaffold
+- AppBar
+- Container
+- SingleChildScrollView
+- Center
+- TextFormField
+- Text 
+- TextButton
+- Snack Bar
+- Column
+- Row
+- TableRow
+- Navigator
+
+### Leaderboard
+- Scaffold
+- AppBar
+- Container
+- Table
+- Center
+- Card
+- Text 
+- TextButton
+- ListView
+- Column
+- Row
+- SizedBox
+- Form
+- SnackBar
+
+### History
+- Scaffold
+- AppBar
+- Container
+- SnackBar
+- Center
+- Card
+- Text 
+- TextButton
+- ListTile
+- Column
+- Row
+- SizedBox
+- Navigator
+- Expanded
+- FutureBuilder
 
 ### Deposit Sampah
 - Scaffold
-- Appbar
+- AppBar
 - FutureBuilder
 - Text
-- Text Button
+- TextButton
 - Column
 - Row
-- Alignment
-- TextStyle
 - Center
 - BoxDecoration
 - Navigator

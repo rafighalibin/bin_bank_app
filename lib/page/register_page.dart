@@ -184,8 +184,8 @@ class _RegisterPageState extends State<RegisterPage> {
                     ),
                     Center(
                         child: Text(
-                      message ?? "",
-                      style: const TextStyle(color: Colors.blue, fontSize: 16),
+                        message ?? "",
+                        style: const TextStyle(color: Colors.blue, fontSize: 16),
                     )),
                     Text("Sudah mempunyai akun?"),
                     TextButton(
